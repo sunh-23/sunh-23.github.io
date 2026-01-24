@@ -1,0 +1,2579 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hui Sun (孙辉) - Homepage</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- 性能优化：预连接CDN -->
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <style>
+        :root {
+            --primary-blue: #1e40af;
+            --accent-blue: #3b82f6;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --border-light: #e5e7eb;
+            --bg-light: #f9fafb;
+        }
+        
+        /* 平滑滚动 */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #ffffff;
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding-top: 64px;
+            font-size: 16px;
+        }
+        
+        /* 加载动画 */
+        #loading {
+            position: fixed;
+            inset: 0;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.3s ease;
+        }
+        
+        #loading.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .loader {
+            width: 48px;
+            height: 48px;
+            border: 3px solid var(--border-light);
+            border-top-color: var(--primary-blue);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* 增大主要内容字体 */
+        .card p,
+        .card h4,
+        .card h3,
+        .publication-item {
+            font-size: 1.05em;
+        }
+        
+        /* Related links保持较小字体 */
+        .achievement-box .grid p {
+            font-size: 0.85em;
+        }
+        
+        .serif { font-family: 'Crimson Pro', serif; }
+        
+        /* Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-bottom: 0px solid var(--border-light);
+            z-index: 1000;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+        
+        .navbar-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0.6rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .navbar-brand {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        
+        .navbar-subtitle {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            font-weight: 400;
+        }
+        
+        .navbar-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .navbar-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: color 0.2s ease;
+        }
+        
+        .navbar-links a:hover {
+            color: var(--primary-blue);
+        }
+        
+        /* 汉堡菜单按钮 */
+        .hamburger-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 0.5rem;
+            background: none;
+            border: none;
+        }
+        
+        .hamburger-menu span {
+            width: 24px;
+            height: 2px;
+            background: var(--text-primary);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+        
+        /* 移动端菜单覆盖层 */
+        .mobile-menu-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+        
+        .mobile-menu-overlay.active {
+            display: block;
+        }
+        
+        /* 移动端菜单 */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 250px;
+            height: 100%;
+            background: white;
+            box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
+            transition: right 0.3s ease;
+            z-index: 1000;
+            padding: 1rem;
+        }
+        
+        .mobile-menu.active {
+            right: 0;
+        }
+        
+        .mobile-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-light);
+        }
+        
+        .mobile-menu-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-primary);
+            padding: 0.5rem;
+        }
+        
+        .mobile-menu-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+        
+        .mobile-menu-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--bg-light);
+            transition: color 0.2s ease;
+        }
+        
+        .mobile-menu-links a:hover {
+            color: var(--primary-blue);
+        }
+        
+        .card {
+            background: white;
+            border-radius: 8px;
+            border: 1px solid var(--border-light);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Publication间隔减小，字体增大 */
+        .publication-item {
+            display: grid;
+            grid-template-columns: 50px 120px 1fr;
+            gap: 1rem;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid var(--bg-light);
+            transition: background 0.2s ease;
+        }
+        
+        .publication-item:hover {
+            background: var(--bg-light);
+        }
+        
+        .publication-item:last-child {
+            border-bottom: none;
+        }
+        
+        .pub-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            background: var(--primary-blue);
+            color: white;
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+        
+        /* Tag和内容字体增大 */
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background: #eff6ff;
+            color: var(--primary-blue);
+            margin-right: 0.25rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        .badge-gold {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        
+        .badge-preprint {
+            background: #f3f4f6;
+            color: #4b5563;
+        }
+        
+        /* 论文标题和作者字体缩小 */
+        .publication-item h4 {
+            font-size: 0.9rem;
+        }
+        
+        .publication-item p {
+            font-size: 0.8rem;
+        }
+        
+        .section-divider {
+            width: 50px;
+            height: 3px;
+            background: var(--primary-blue);
+            margin: 0.5rem 0 1rem 0;
+            border-radius: 2px;
+        }
+        
+        .profile-image {
+            border: 3px solid white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo-image {
+            height: 60px;
+            object-fit: contain;
+        }
+        
+        .icon-link {
+            width: 36px;
+            height: 36px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            background: white;
+            border: 1px solid var(--border-light);
+            transition: all 0.2s ease;
+        }
+        
+        .icon-link:hover {
+            background: var(--primary-blue);
+            color: white;
+            border-color: var(--primary-blue);
+        }
+        
+        .research-tag {
+            display: inline-block;
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background: #eff6ff;
+            color: var(--primary-blue);
+            margin: 0.15rem;
+            transition: all 0.2s ease;
+        }
+        
+        .research-tag:hover {
+            background: var(--primary-blue);
+            color: white;
+        }
+        
+        .company-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.25rem;
+            border-left: 8px solid var(--primary-blue);
+            border: 1px solid var(--border-light);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.2s ease;
+        }
+        
+        .company-card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 各公司主题色边框 */
+        .company-card.alibaba {
+            border-left-color: #FF6A00;
+        }
+        
+        .company-card.shopee {
+            border-left-color: #EE4D2D;
+        }
+        
+        .company-card.bytedance {
+            border-left-color: #0084FF;
+        }
+        
+        .company-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--bg-light);
+        }
+        
+        .research-column {
+            background: white;
+            border-radius: 8px;
+            padding: 1.25rem;
+            height: 100%;
+            transition: all 0.2s ease;
+            border-top: 3px solid var(--primary-blue);
+            border: 1px solid var(--border-light);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .research-column:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .time-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            background: var(--bg-light);
+            color: var(--text-secondary);
+            padding: 0.3rem 0.7rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        
+        .highlight-card {
+            background: var(--bg-light);
+            border-radius: 8px;
+            padding: 0.9rem;
+            border-left: 3px solid var(--primary-blue);
+            border: 1px solid var(--border-light);
+            transition: all 0.2s ease;
+            position: relative;
+        }
+        
+        .highlight-card:hover {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .highlight-number {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            display: block;
+        }
+        
+        /* 缩小highlight卡片的标题和描述文字 */
+        .highlight-card p.text-xs {
+            font-size: 0.7rem;
+        }
+        
+        .highlight-card p.font-semibold {
+            font-size: 0.75rem;
+        }
+        
+        .edu-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 0.75rem;
+            border-left: 4px solid var(--primary-blue);
+            border: 1px solid var(--border-light);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.2s ease;
+        }
+        
+        .edu-card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .award-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid var(--border-light);
+            transition: all 0.2s ease;
+        }
+        
+        .award-item:hover {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .award-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        
+        .achievement-box {
+            background: var(--bg-light);
+            border-radius: 8px;
+            padding: 1rem;
+            border-left: 3px solid var(--primary-blue);
+            margin-top: 1rem;
+            border: 1px solid var(--border-light);
+        }
+
+        .card-icon {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .inline-icon {
+            margin-right: 0.3rem;
+            font-size: 0.9rem;
+        }
+
+        /* 外链图标样式 */
+        .external-link-icon {
+            display: inline;
+            width: 0.75rem;
+            height: 0.75rem;
+            margin-left: 0.15rem;
+            color: #9ca3af;
+        }
+
+        /* 论文作者名字高亮 */
+        .author-highlight {
+            color: var(--primary-blue);
+            font-weight: 700;
+            text-decoration: underline;
+        }
+
+        /* 修复锚点跳转偏移 */
+        [id] {
+            scroll-margin-top: 80px;
+        }
+        
+        /* ============================================
+           时间轴样式 - 统一版本（已清理重复）
+           ============================================ */
+        .timeline-container {
+            max-width: 100%;
+            margin: 0 0 0 0;
+            padding: 1rem 1rem;
+            background: linear-gradient(to bottom, #fafafa 0%, #ffffff 100%);
+            border-radius: 12px;
+        }
+        
+        /* 时间轴主容器 */
+        .timeline-dual-track {
+            position: relative;
+            padding: 0 0.8rem;
+            min-height: 220px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        /* SVG连线层 */
+        .timeline-connections-svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        /* 教育时间轴（上） */
+        .timeline-education-track {
+            position: relative;
+            margin-bottom: 0;
+            z-index: 2;
+        }
+        
+        /* 工作时间轴（下） */
+        .timeline-work-track {
+            position: relative;
+            margin-top: 0;
+            z-index: 2;
+        }
+        
+        /* 卡片行 */
+        .timeline-cards-row {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 0.8rem;
+        }
+        
+        .timeline-work-track .timeline-cards-row {
+            margin-bottom: 0;
+            margin-top: 0.8rem;
+        }
+        
+        /* 时间轴条容器 */
+        .timeline-axis-container {
+            position: relative;
+            height: 30px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* 教育时间轴（上半部分，15px高） */
+        .timeline-axis.education {
+            position: relative;
+            height: 15px;
+            background: rgba(167, 139, 250, 0.08);
+        }
+        
+        /* 工作时间轴（下半部分，15px高） */
+        .timeline-axis.work {
+            position: relative;
+            height: 15px;
+            background: rgba(96, 165, 250, 0.08);
+        }
+        
+        /* 时间Bar - 添加圆角以区分相邻段 */
+        .timeline-segment {
+            position: absolute;
+            height: 100%;
+            top: 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 3px;  /* 添加略微圆角 */
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);  /* 柔和底部阴影 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.6rem;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .timeline-segment:hover {
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.25);
+            transform: translateY(-2px);
+            z-index: 10;
+        }
+        
+        /* 教育bar - 紫色渐变系（从浅到深） */
+        .timeline-segment.education:nth-of-type(1) {
+            background: #c084fc;  /* Purple-300 最浅 */
+        }
+        
+        .timeline-segment.education:nth-of-type(2) {
+            background: #a78bfa;  /* Purple-400 */
+        }
+        
+        .timeline-segment.education:nth-of-type(3) {
+            background: #8b5cf6;  /* Purple-500 最深 */
+        }
+        
+        /* 工作bar - 蓝色渐变系（从浅到深） */
+        .timeline-segment.work:nth-of-type(1) {
+            background: #93c5fd;  /* Blue-300 最浅 */
+        }
+        
+        .timeline-segment.work:nth-of-type(2) {
+            background: #60a5fa;  /* Blue-400 */
+        }
+        
+        .timeline-segment.work:nth-of-type(3) {
+            background: #3b82f6;  /* Blue-500 */
+        }
+        
+        .timeline-segment.work:nth-of-type(4) {
+            background: #2563eb;  /* Blue-600 */
+        }
+        
+        .timeline-segment.work:nth-of-type(5) {
+            background: #1d4ed8;  /* Blue-700 最深 */
+        }
+        
+        /* Bar位置 - 统一计算（基于2015.9.1-2026.12.31, 137个月=100%，支持Present延伸） */
+        /* 教育时间精确计算 */
+        .timeline-segment[data-event="bsc"] { 
+            left: 0%; 
+            width: 33.58%;  /* 2015.9.1-2019.6.30: 46个月/137 */
+        }
+        
+        .timeline-segment[data-event="msc"] { 
+            left: 35.04%; 
+            width: 24.82%;  /* 2019.9.1-2022.6.30: 34个月/137 */
+        }
+        
+        .timeline-segment[data-event="phd"] { 
+            left: 70.07%; 
+            width: 29.20%;  /* 2023.9.1-Present(~2026.12): 40个月/137 */
+        }
+        
+        /* 工作时间精确计算 */
+        .timeline-segment[data-event="bytedance"] { 
+            left: 27.01%; 
+            width: 4.38%;   /* 2018.10.1-2019.3.31: 6个月/137 */
+        }
+        
+        .timeline-segment[data-event="aliexpress"] { 
+            left: 50.36%; 
+            width: 2.92%;   /* 2021.6.1-2021.9.30: 4个月/137 */
+        }
+        
+        .timeline-segment[data-event="shopee"] { 
+            left: 59.85%; 
+            width: 10.22%;  /* 2022.7.1-2023.8.31: 14个月/137 */
+        }
+        
+        .timeline-segment[data-event="alibaba"] { 
+            left: 70.07%; 
+            width: 16.06%;  /* 2023.9.1-2025.6.30: 22个月/137 */
+        }
+        
+        .timeline-segment[data-event="tiktok"] { 
+            left: 86.13%; 
+            width: 13.14%;  /* 2025.7.1-2026.12.31: 18个月/137 */
+        }
+        
+        /* 卡片 */
+        .timeline-event-card {
+            background: #ffffff;
+            padding: 0.45rem 0.55rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            position: relative;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            background-clip: padding-box;
+            width: 150px;
+            flex-shrink: 0;
+        }
+        
+        .timeline-event-card::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 10px;
+            padding: 2px;
+            background: #a78bfa;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            z-index: -1;
+        }
+        
+        /* 教育卡片边框 - 紫色渐变系（从浅到深） */
+        .timeline-education-track .timeline-event-card:nth-child(1)::before {
+            background: #c084fc;  /* Purple-300 最浅 */
+        }
+        
+        .timeline-education-track .timeline-event-card:nth-child(2)::before {
+            background: #a78bfa;  /* Purple-400 */
+        }
+        
+        .timeline-education-track .timeline-event-card:nth-child(3)::before {
+            background: #8b5cf6;  /* Purple-500 最深 */
+        }
+        
+        /* 工作卡片边框 - 蓝色渐变系（从浅到深） */
+        .timeline-work-track .timeline-event-card:nth-child(1)::before {
+            background: #93c5fd;  /* Blue-300 最浅 */
+        }
+        
+        .timeline-work-track .timeline-event-card:nth-child(2)::before {
+            background: #60a5fa;  /* Blue-400 */
+        }
+        
+        .timeline-work-track .timeline-event-card:nth-child(3)::before {
+            background: #3b82f6;  /* Blue-500 */
+        }
+        
+        .timeline-work-track .timeline-event-card:nth-child(4)::before {
+            background: #2563eb;  /* Blue-600 */
+        }
+        
+        .timeline-work-track .timeline-event-card:nth-child(5)::before {
+            background: #1d4ed8;  /* Blue-700 最深 */
+        }
+        
+        .timeline-event-card:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* 教育卡片内容 - 3行格式 */
+        .edu-card-school-tag {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.25rem;
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            padding: 0.25rem 0.4rem;
+            background: rgba(167, 139, 250, 0.12);
+            border-radius: 5px;
+            margin-bottom: 0.35rem;
+            width: 100%;
+        }
+        
+        .edu-card-school-tag i {
+            color: #8b5cf6;
+            font-size: 0.7rem;
+        }
+        
+        .edu-card-degree-short {
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 0.3rem;
+            text-align: center;
+        }
+        
+        .edu-card-date {
+            font-size: 0.6rem;
+            font-weight: 600;
+            color: #8b5cf6;
+            text-align: center;
+            padding: 0.2rem 0.4rem;
+            background: rgba(167, 139, 250, 0.12);
+            border-radius: 4px;
+        }
+        
+        /* 工作卡片内容 - 3行格式（新增岗位） */
+        .work-card-date {
+            font-size: 0.6rem;
+            font-weight: 600;
+            color: #3b82f6;
+            text-align: center;
+            padding: 0.2rem 0.4rem;
+            background: rgba(96, 165, 250, 0.12);
+            border-radius: 4px;
+            margin-bottom: 0.35rem;
+        }
+        
+        .work-card-company-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.25rem;
+            margin-bottom: 0.3rem;
+        }
+        
+        .work-card-company {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            flex-shrink: 0;
+        }
+        
+        .work-card-type {
+            font-size: 0.55rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.2rem;
+            background: rgba(147, 197, 253, 0.15);
+            padding: 0.2rem 0.35rem;
+            border-radius: 4px;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        
+        .work-card-type i {
+            color: #3b82f6;
+            font-size: 0.55rem;
+        }
+        
+        .work-card-position {
+            font-size: 0.6rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-align: center;
+            line-height: 1.3;
+        }
+        
+        /* SVG连线样式 */
+        .timeline-connection-path {
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            opacity: 0.5;
+            transition: all 0.3s ease;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 1024px) {
+            .timeline-dual-track {
+                overflow-x: auto;
+                padding-bottom: 1rem;
+                max-width: 100%;
+            }
+            
+            .timeline-education-track,
+            .timeline-work-track {
+                min-width: 750px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding-top: 50px;
+                font-size: 14px;
+            }
+            
+            .navbar-content {
+                padding: 0.5rem 1rem;
+            }
+            
+            .navbar-brand {
+                font-size: 1.2rem;
+            }
+            
+            .navbar-subtitle {
+                font-size: 0.75rem;
+            }
+            
+            /* 手机端隐藏桌面导航 */
+            .navbar-links {
+                display: none;
+            }
+            
+            /* 手机端显示汉堡菜单 */
+            .hamburger-menu {
+                display: flex;
+            }
+            
+            /* 手机端隐藏时间轴 */
+            .timeline-container {
+                display: none;
+            }
+            
+            /* 手机端Profile优化 */
+            #profile .flex {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            #profile .profile-image {
+                width: 100px !important;
+                height: 100px !important;
+                margin-bottom: 1rem;
+            }
+            
+            #profile h1 {
+                font-size: 1.5rem;
+                text-align: center;
+            }
+            
+            /* 修复描述文字的布局 - 让它们垂直排列而不是分栏 */
+            #profile .text-base {
+                font-size: 0.85rem;
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            #profile .text-base span {
+                display: block;
+                width: 100%;
+            }
+            
+            #profile .text-base br {
+                display: none;
+            }
+            
+            /* 优化联系方式显示 */
+            #profile .flex-wrap {
+                justify-content: center;
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+            }
+            
+            #profile .flex.items-center.gap-1 {
+                font-size: 0.75rem;
+                width: 100%;
+                justify-content: center;
+            }
+            
+            #profile .icon-link {
+                width: 28px;
+                height: 28px;
+            }
+            
+            #profile .icon-link svg {
+                width: 14px;
+                height: 14px;
+            }
+            
+            #profile a.text-sm {
+                font-size: 0.75rem;
+            }
+            
+            /* 手机端隐藏右侧logo和badge */
+            #profile > div > div:last-child {
+                display: none;
+            }
+            
+            /* 手机端优化section标题 */
+            h2.text-xl {
+                font-size: 1.1rem;
+            }
+            
+            h2.text-xl svg {
+                width: 1rem;
+                height: 1rem;
+            }
+            
+            h3.text-base {
+                font-size: 0.9rem;
+            }
+            
+            /* 手机端Biography文字优化 */
+            #biography p {
+                font-size: 0.8rem;
+                line-height: 1.5;
+            }
+            
+            /* 手机端优化卡片间距 */
+            .card {
+                margin-bottom: 0.75rem;
+            }
+            
+            .max-w-5xl {
+                padding-left: 0.75rem;
+                padding-right: 0.75rem;
+            }
+            
+            /* 手机端优化header */
+            .profile-image {
+                width: 120px !important;
+                height: 120px !important;
+            }
+            
+            /* 手机端优化研究兴趣卡片 */
+            .research-column {
+                padding: 1rem;
+                margin-bottom: 0.75rem;
+            }
+            
+            /* 手机端优化工作经历卡片 */
+            .company-card {
+                padding: 1rem;
+                margin-bottom: 1rem;
+            }
+            
+            .company-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+            
+            .time-tag {
+                font-size: 0.7rem;
+                padding: 0.25rem 0.5rem;
+            }
+            
+            /* 手机端优化highlight卡片 */
+            .highlight-card {
+                padding: 0.6rem;
+            }
+            
+            .highlight-number {
+                font-size: 1.1rem;
+            }
+            
+            .highlight-card p.text-xs {
+                font-size: 0.65rem;
+            }
+            
+            .highlight-card p.font-semibold {
+                font-size: 0.7rem;
+            }
+            
+            /* 手机端Publications优化 */
+            .publication-item {
+                grid-template-columns: 40px 1fr;
+                gap: 0.5rem;
+                padding: 0.5rem 0;
+            }
+            
+            .publication-item > div:nth-child(2) {
+                grid-column: 2 / 3;
+            }
+            
+            .publication-item > div:nth-child(3) {
+                grid-column: 1 / 3;
+            }
+            
+            .pub-number {
+                width: 32px;
+                height: 32px;
+                font-size: 0.75rem;
+            }
+            
+            .badge {
+                font-size: 0.65rem;
+                padding: 0.2rem 0.4rem;
+            }
+            
+            .publication-item h4 {
+                font-size: 0.85rem;
+            }
+            
+            .publication-item p {
+                font-size: 0.75rem;
+            }
+            
+            /* 手机端教育卡片优化 */
+            .edu-card {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            /* 手机端奖项优化 */
+            .award-item {
+                padding: 0.75rem;
+                gap: 0.5rem;
+            }
+            
+            .award-icon {
+                width: 2rem;
+                height: 2rem;
+                font-size: 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased" style="background: #fafafa;">
+    
+    <!-- Loading Animation -->
+    <div id="loading">
+        <div class="loader"></div>
+    </div>
+    
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-content">
+            <div>
+                <span class="navbar-brand serif">Hui Sun</span>
+                <span class="navbar-subtitle">@ LAMDA, NJU</span>
+            </div>
+            <div class="navbar-links">
+                <a href="#biography" aria-label="跳转到个人简介">Biography</a>
+                <a href="#research" aria-label="跳转到研究兴趣">Research</a>
+                <a href="#publications" aria-label="跳转到发表论文">Publications</a>
+                <a href="#awards" aria-label="跳转到获奖荣誉">Awards</a>
+                <a href="#experience" aria-label="跳转到工作经历">Experience</a>
+                <a href="#education" aria-label="跳转到教育经历">Education</a>
+                <a href="#teaching" aria-label="跳转到助教经历">Teaching</a>
+            </div>
+            <button class="hamburger-menu" id="hamburgerMenu" aria-label="打开菜单">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+    
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <span class="navbar-brand serif">Menu</span>
+            <button class="mobile-menu-close" id="mobileMenuClose" aria-label="关闭菜单">&times;</button>
+        </div>
+        <div class="mobile-menu-links">
+            <a href="#biography" class="mobile-menu-link">Biography</a>
+            <a href="#research" class="mobile-menu-link">Research</a>
+            <a href="#publications" class="mobile-menu-link">Publications</a>
+            <a href="#awards" class="mobile-menu-link">Awards</a>
+            <a href="#experience" class="mobile-menu-link">Experience</a>
+            <a href="#education" class="mobile-menu-link">Education</a>
+            <a href="#teaching" class="mobile-menu-link">Teaching</a>
+        </div>
+    </div>
+
+    <div class="max-w-6xl mx-auto space-y-4 py-6 px-4">
+        
+        <!-- Header Section -->
+        <div class="card p-6" id="profile">
+            <div class="flex flex-col md:flex-row gap-6 items-center md:items-start">
+                <div class="flex-shrink-0">
+                    <div class="profile-image rounded-2xl overflow-hidden w-40 h-40 bg-gradient-to-br from-blue-50 to-indigo-50">
+                        <img src="profile.jpg" alt="Hui Sun" class="w-full h-full object-cover" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'w-full h-full flex items-center justify-center text-5xl serif font-bold\' style=\'color: var(--primary-blue);\'>HS</div>';" />
+                    </div>
+                </div>
+                <div class="flex-1 text-center md:text-left">
+                    <h1 class="text-4xl font-bold serif mb-1" style="color: var(--text-primary);">Hui Sun (孙辉)</h1>
+                    <div class="section-divider md:mx-0 mx-auto"></div>
+                    <p class="text-base mb-2" style="color: var(--text-secondary);">
+                        <span class="inline-flex items-center gap-1">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"></path></svg>
+                            Ph.D. Student at <a href="https://www.lamda.nju.edu.cn/" target="_blank" rel="noopener noreferrer" class="text-gray-700 hover:text-blue-600 inline-flex items-center gap-1">LAMDA Group<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="external-link-icon"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-4.5 0L18 3m0 0h-5.25M18 3v5.25" /></svg></a>, <a href="http://www.nju.edu.cn/" target="_blank" rel="noopener noreferrer" class="text-gray-700 hover:text-blue-600 inline-flex items-center gap-1">Nanjing University<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="external-link-icon"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-4.5 0L18 3m0 0h-5.25M18 3v5.25" /></svg></a>
+                        </span><br>
+                        <span class="inline-flex items-center gap-1">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"></path></svg>
+                            Supervised by <a href="https://www.lamda.nju.edu.cn/lim/" target="_blank" rel="noopener noreferrer" class="text-gray-700 hover:text-blue-600 inline-flex items-center gap-1">Prof. Ming Li (黎铭)<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="external-link-icon"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-4.5 0L18 3m0 0h-5.25M18 3v5.25" /></svg></a>
+                        </span>
+                    </p>
+                    <div class="flex flex-wrap gap-3 justify-center md:justify-start mb-3 items-center" id="contact">
+                        <div class="flex items-center gap-1">
+                            <a href="mailto:sunh@lamda.nju.edu.cn" class="icon-link" title="sunh@lamda.nju.edu.cn" aria-label="发送邮件到sunh@lamda.nju.edu.cn">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+                                    <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+                                </svg>
+                            </a>
+                            <a href="mailto:sunh@lamda.nju.edu.cn" class="text-sm hover:text-blue-600" style="color: var(--text-secondary);">sunh@lamda.nju.edu.cn</a>
+                        </div>
+                        <div class="flex items-center gap-1">
+                            <a href="mailto:sun000mail@gmail.com" class="icon-link" title="sun000mail@gmail.com" aria-label="发送邮件到sun000mail@gmail.com">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"> 
+                                    <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+                                    <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+                                </svg>
+                            </a>
+                            <a href="mailto:sun000mail@gmail.com" class="text-sm hover:text-blue-600" style="color: var(--text-secondary);">sun000mail@gmail.com</a>
+                        </div>
+                    </div>
+
+                   <!--  <div class="flex flex-wrap gap-3 justify-center md:justify-start mb-3 items-center" id="contact">
+                        <div class="flex items-center gap-1">
+                            <a href="mailto:sunh@lamda.nju.edu.cn" class="icon-link" title="sunh@lamda.nju.edu.cn" aria-label="发送邮件到sunh@lamda.nju.edu.cn">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+                                    <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+                                </svg>
+                            </a>
+                            <a href="mailto:sunh@lamda.nju.edu.cn" class="text-sm hover:text-blue-600" style="color: var(--text-secondary);">sunh@lamda.nju.edu.cn</a>
+                        </div>
+                        <div class="flex items-center gap-1">
+                            <a href="mailto:sun000mail@gmail.com" class="icon-link" title="sun000mail@gmail.com" aria-label="发送邮件到sun000mail@gmail.com">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"> 
+                                    <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+                                    <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+                                </svg>
+                            </a>
+                            <a href="mailto:sun000mail@gmail.com" class="text-sm hover:text-blue-600" style="color: var(--text-secondary);">sun000mail@gmail.com</a>
+                        </div>
+                    </div> -->
+                </div>
+                <div class="flex flex-col gap-3 items-center">
+                    <img src="nju_lamda.png" alt="Nanjing University" class="w-24 h-auto" onerror="this.src='https://upload.wikimedia.org/wikipedia/en/4/44/Nanjing_University_Logo.svg';">
+                    <div class="text-xs font-semibold text-center px-3 py-1 rounded inline-flex items-center gap-1" style="background: #eff6ff; color: var(--primary-blue);">
+                        <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"></path></svg>
+                        LAMDA Group
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Biography -->
+        <div class="card p-6" id="biography">
+            <h2 class="text-xl font-bold serif mb-1 inline-flex items-center gap-2" style="color: var(--primary-blue);">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
+                Biography
+            </h2>
+            <div class="section-divider"></div>
+            <p class="text-sm text-gray-600 leading-relaxed">
+                I am a Ph.D. student at
+                <a href="http://ai.nju.edu.cn/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline inline-flex items-center gap-1">
+                    School of Artificial Intelligence
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="external-link-icon">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-4.5 0L18 3m0 0h-5.25M18 3v5.25" />
+                    </svg>
+                </a>
+                in
+                <a href="http://www.nju.edu.cn/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline inline-flex items-center gap-1">
+                    Nanjing University
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="external-link-icon">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-4.5 0L18 3m0 0h-5.25M18 3v5.25" />
+                    </svg>
+                </a>,
+                and a member of
+                <a href="https://www.lamda.nju.edu.cn/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline inline-flex items-center gap-1">
+                    LAMDA Group
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="external-link-icon">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-4.5 0L18 3m0 0h-5.25M18 3v5.25" />
+                    </svg>
+                </a>,
+                led by
+                <a href="http://cs.nju.edu.cn/zhouzh/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline inline-flex items-center gap-1">
+                    Prof. Zhi-Hua Zhou
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="external-link-icon">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-4.5 0L18 3m0 0h-5.25M18 3v5.25" />
+                    </svg>
+                </a>.
+            </p>
+
+            <p class="text-sm text-gray-600 leading-relaxed mt-2">
+                I received my B.Sc. from
+                <a href="https://csw.jlu.edu.cn/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline inline-flex items-center gap-1">
+                    Software College
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="external-link-icon">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-4.5 0L18 3m0 0h-5.25M18 3v5.25" />
+                    </svg>
+                </a>
+                at
+                <a href="https://www.jlu.edu.cn/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline inline-flex items-center gap-1">
+                    Jilin University
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="external-link-icon">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-4.5 0L18 3m0 0h-5.25M18 3v5.25" />
+                    </svg>
+                </a>
+                in 2019. I then joined Nanjing University as a M.Sc. student (direct admission) and graduated in 2022. From 2022 to 2023, I worked as an algorithm engineer at
+                <a href="https://shopee.cn/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline inline-flex items-center gap-1">
+                    Shopee
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="external-link-icon">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-4.5 0L18 3m0 0h-5.25M18 3v5.25" />
+                    </svg>
+                </a>.
+                In 2023, I returned to LAMDA to pursue a full-time Ph.D.
+            </p>
+            
+            <!-- Timeline -->
+            <div class="timeline-container">
+                <div class="timeline-dual-track" id="timelineDualTrack">
+                    <!-- SVG连线层 -->
+                    <svg class="timeline-connections-svg" id="timelineConnections">
+                        <!-- 连线会由JavaScript动态生成 -->
+                    </svg>
+                    
+                    <!-- 教育时间轴（上） -->
+                    <div class="timeline-education-track">
+                        <!-- 教育卡片 -->
+                        <div class="timeline-cards-row">
+                            <!-- B.Sc. -->
+                            <div class="timeline-event-card" data-connect="bsc">
+                                <div class="edu-card-school-tag">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    Jilin University
+                                </div>
+                                <div class="edu-card-degree-short">B.Sc. in SE</div>
+                                <div class="edu-card-date">Sep 2015 - Jun 2019</div>
+                            </div>
+                            
+                            <!-- M.Sc. -->
+                            <div class="timeline-event-card" data-connect="msc">
+                                <div class="edu-card-school-tag">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    Nanjing University
+                                </div>
+                                <div class="edu-card-degree-short">M.Sc. in CS</div>
+                                <div class="edu-card-date">Sep 2019 - Jun 2022</div>
+                            </div>
+                            
+                            <!-- Ph.D. -->
+                            <div class="timeline-event-card" data-connect="phd">
+                                <div class="edu-card-school-tag">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    Nanjing University
+                                </div>
+                                <div class="edu-card-degree-short">Ph.D. in CS</div>
+                                <div class="edu-card-date">Sep 2023 - Present</div>
+                            </div>
+                        </div>
+                        
+                        <!-- 教育时间轴 - 上半部分 -->
+                        <div class="timeline-axis-container">
+                            <div class="timeline-axis education">
+                                <div class="timeline-segment education" data-event="bsc"></div>
+                                <div class="timeline-segment education" data-event="msc"></div>
+                                <div class="timeline-segment education" data-event="phd"></div>
+                            </div>
+                            <!-- 工作时间轴 - 下半部分（紧贴） -->
+                            <div class="timeline-axis work">
+                                <div class="timeline-segment work" data-event="bytedance"></div>
+                                <div class="timeline-segment work" data-event="aliexpress"></div>
+                                <div class="timeline-segment work" data-event="shopee"></div>
+                                <div class="timeline-segment work" data-event="alibaba"></div>
+                                <div class="timeline-segment work" data-event="tiktok"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 工作时间轴（下） -->
+                    <div class="timeline-work-track">
+                        <!-- 工作卡片 -->
+                        <div class="timeline-cards-row">
+                            <!-- ByteDance -->
+                            <div class="timeline-event-card" data-connect="bytedance">
+                                <div class="work-card-date">Oct 2018 - Mar 2019</div>
+                                <div class="work-card-company-row">
+                                    <div class="work-card-company">ByteDance</div>
+                                    <div class="work-card-type">
+                                        <i class="fas fa-briefcase"></i>
+                                        Intern
+                                    </div>
+                                </div>
+                                <div class="work-card-position">Search Algorithm</div>
+                            </div>
+                            
+                            <!-- AliExpress -->
+                            <div class="timeline-event-card" data-connect="aliexpress">
+                                <div class="work-card-date">Jun 2021 - Sep 2021</div>
+                                <div class="work-card-company-row">
+                                    <div class="work-card-company">AliExpress</div>
+                                    <div class="work-card-type">
+                                        <i class="fas fa-briefcase"></i>
+                                        Intern
+                                    </div>
+                                </div>
+                                <div class="work-card-position">Recommendation Algo.</div>
+                            </div>
+                            
+                            <!-- Shopee -->
+                            <div class="timeline-event-card" data-connect="shopee">
+                                <div class="work-card-date">Jul 2022 - Aug 2023</div>
+                                <div class="work-card-company-row">
+                                    <div class="work-card-company">Shopee</div>
+                                    <div class="work-card-type">
+                                        <i class="fas fa-building"></i>
+                                        Full-time
+                                    </div>
+                                </div>
+                                <div class="work-card-position">Search Algorithm</div>
+                            </div>
+                            
+                            <!-- Alibaba -->
+                            <div class="timeline-event-card" data-connect="alibaba">
+                                <div class="work-card-date">Sep 2023 - Jun 2025</div>
+                                <div class="work-card-company-row">
+                                    <div class="work-card-company">Alibaba</div>
+                                    <div class="work-card-type">
+                                        <i class="fas fa-briefcase"></i>
+                                        Intern
+                                    </div>
+                                </div>
+                                <div class="work-card-position">Multimodal LLM Research</div>
+                            </div>
+                            
+                            <!-- TikTok -->
+                            <div class="timeline-event-card" data-connect="tiktok">
+                                <div class="work-card-date">Jul 2025 - Present</div>
+                                <div class="work-card-company-row">
+                                    <div class="work-card-company">TikTok</div>
+                                    <div class="work-card-type">
+                                        <i class="fas fa-briefcase"></i>
+                                        Intern (筋斗云)
+                                    </div>
+                                </div>
+                                <div class="work-card-position">LLM Research for Rec.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Research Interests -->
+        <div class="card p-6" id="research">
+            <h2 class="text-xl font-bold serif mb-1 inline-flex items-center gap-2" style="color: var(--primary-blue);">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"></path></svg>
+                Research Interests
+            </h2>
+            <div class="section-divider"></div>
+            <p class="text-sm mb-4" style="color: var(--text-secondary);">I am interested in machine learning and data mining, especially the following:</p>
+            
+            <div class="grid md:grid-cols-3 gap-4">
+                <div class="research-column">
+                    <h3 class="font-bold text-sm mb-3" style="color: var(--primary-blue);">Transfer Learning & Semi-supervised Learning</h3>
+                    <div class="flex flex-wrap gap-1">
+                        <a href="#pub-p1" class="research-tag">[P1]</a>
+                        <a href="#pub-j3" class="research-tag">[J3]</a>
+                        <a href="#pub-c8" class="research-tag">[C8]</a>
+                        <a href="#pub-c9" class="research-tag">[C9]</a>
+                        <!-- <a href="#pub-pt1" class="research-tag">[PT1]</a> -->
+                    </div>
+                </div>
+                
+                <div class="research-column">
+                    <h3 class="font-bold text-sm mb-1" style="color: var(--primary-blue);">Multimodal & Code LLMs</h3>
+                    <div class="flex flex-wrap gap-1">
+                        <a href="#pub-p2" class="research-tag">[P2]</a>
+                        <a href="#pub-p3" class="research-tag">[P3]</a>
+                        <a href="#pub-p4" class="research-tag">[P4]</a>
+                        <a href="#pub-p5" class="research-tag">[P5]</a>
+                        <a href="#pub-p6" class="research-tag">[P6]</a>
+                        <a href="#pub-j1" class="research-tag">[J1]</a>
+                        <a href="#pub-c2" class="research-tag">[C2]</a>
+                        <a href="#pub-c3" class="research-tag">[C3]</a>
+                        <a href="#pub-c4" class="research-tag">[C4]</a>
+                        <a href="#pub-c5" class="research-tag">[C5]</a>
+                        <a href="#pub-c6" class="research-tag">[C6]</a>
+                        <a href="#experience_AIDC" class="research-tag" style="background: rgba(255, 106, 0, 0.15); color: #FF6A00; font-size: 0.65rem;">Intern@Ali AIDC</a>
+                    </div>
+                </div>
+                
+                <div class="research-column">
+                    <h3 class="font-bold text-sm mb-3" style="color: var(--primary-blue);">Search & Recomendation System</h3>
+                    <div class="flex flex-wrap gap-1">
+                        <a href="#pub-c1" class="research-tag">[C1]</a>
+                        <a href="#pub-j2" class="research-tag">[J2]</a>
+                        <a href="#pub-c10" class="research-tag">[C10]</a>
+                        <a href="#experience_shopee" class="research-tag" style="background: rgba(238, 77, 45, 0.15); color: #EE4D2D; font-size: 0.65rem;">Work@Shopee</a>
+                        <a href="#experience_tiktok" class="research-tag" style="background: rgba(0, 132, 255, 0.15); color: #0084FF; font-size: 0.65rem;">Intern@TikTok</a>
+                        <a href="#experience_AE" class="research-tag" style="background: rgba(255, 106, 0, 0.15); color: #FF6A00; font-size: 0.65rem;">Intern@AliExpress</a>
+                        <a href="#experience_bytedance" class="research-tag" style="background: rgba(0, 132, 255, 0.15); color: #0084FF; font-size: 0.65rem;">Intern@ByteDance</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Publications -->
+        <div class="card p-6" id="publications">
+            <h2 class="text-xl font-bold serif mb-1 inline-flex items-center gap-2" style="color: var(--primary-blue);">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9 2a2 2 0 00-2 2v8a2 2 0 002 2h6a2 2 0 002-2V6.414A2 2 0 0016.414 5L14 2.586A2 2 0 0012.586 2H9z"></path><path d="M3 8a2 2 0 012-2v10h8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"></path></svg>
+                Publications
+            </h2>
+            <div class="section-divider"></div>
+            
+            <!-- Preprint -->
+            <div class="mb-4">
+                <h3 class="text-base font-semibold serif mb-3" style="color: var(--text-secondary);">Preprints</h3>
+                <div>
+                    <div class="publication-item" id="pub-p1">
+                        <div class="flex justify-center">
+                            <div class="pub-number">P1</div>
+                        </div>
+                        <div class="flex flex-wrap items-start gap-1">
+                            <span class="badge badge-preprint">Preprint</span>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-semibold text-sm mb-1 encrypted-title" style="color: var(--primary-blue);" data-encrypted="TWl0aWdhdGluZyBOZWdhdGl2ZSBUcmFuc2ZlciBpbiBVbnN1cGVydmlzZWQgRG9tYWluIEFkYXB0YXRpb24gdmlhIFJlZHVjaW5nIEVudmlyb25tZW50YWwgRGlzYWdyZWVtZW50">Loading...</h4>
+                            <p class="text-xs mb-1" style="color: var(--text-secondary);">
+                                <span class="author-highlight">Hui Sun</span>, Zheng Xie, Hao-Yuan He, and Ming Li
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="publication-item" id="pub-p2">
+                        <div class="flex justify-center">
+                            <div class="pub-number">P2</div>
+                        </div>
+                        <div class="flex flex-wrap items-start gap-1">
+                            <span class="badge badge-preprint">Preprint</span>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-semibold text-sm mb-1 encrypted-title" style="color: var(--primary-blue);" data-encrypted="RW5oYW5jaW5nIExMTXMgaW4gTG9uZyBDb2RlIFRyYW5zbGF0aW9uIHdpdGggSW5zdHJ1bWVudGF0aW9uIGFuZCBQcm9ncmFtIFN0YXRlIEFsaWdubWVudA==">Loading...</h4>
+                            <p class="text-xs" style="color: var(--text-secondary);">
+                                Xin-Ye Li, Yali Du, <span class="author-highlight">Hui Sun</span>, and Ming Li
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="publication-item" id="pub-p3">
+                        <div class="flex justify-center">
+                            <div class="pub-number">P3</div>
+                        </div>
+                        <div class="flex flex-wrap items-start gap-1">
+                            <span class="badge badge-preprint">Preprint</span>
+                        </div>
+                        <div class="flex-1">
+                           <h4 class="font-semibold text-sm mb-1 encrypted-title" style="color: var(--primary-blue);" data-encrypted="RGVzaWduLVNwZWNpZmljYXRpb24gVGlsaW5nIGZvciBJQ0wtYmFzZWQgQ0FEIENvZGUgR2VuZXJhdGlvbg==">Loading...</h4>
+                            <p class="text-xs mb-1" style="color: var(--text-secondary);">
+                                Yali Du, Sanzhuo Xi, <span class="author-highlight">Hui Sun</span>, and Ming Li
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="publication-item" id="pub-p4">
+                        <div class="flex justify-center">
+                            <div class="pub-number">P4</div>
+                        </div>
+                        <div class="flex flex-wrap items-start gap-1">
+                            <span class="badge badge-preprint">Preprint</span>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-semibold text-sm mb-1 encrypted-title" style="color: var(--primary-blue);" data-encrypted="RXhwbG9yaW5nIFBhc3MtUmF0ZSBSZXdhcmRzIGluIFJlaW5mb3JjZW1lbnQgTGVhcm5pbmcgZm9yIENvZGUgR2VuZXJhdGlvbg==">Loading...</h4>
+                            <p class="text-xs mb-1" style="color: var(--text-secondary);">
+                                Xin-Ye Li, Ren-Biao Liu, Yun-Ji Zhang, <span class="author-highlight">Hui Sun</span>, Zheng Xie, and Ming Li
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="publication-item" id="pub-p5">
+                        <div class="flex justify-center">
+                            <div class="pub-number">P5</div>
+                        </div>
+                        <div class="flex flex-wrap items-start gap-1">
+                            <span class="badge badge-preprint">Preprint</span>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-semibold text-sm mb-1 encrypted-title" style="color: var(--primary-blue);" data-encrypted="UmFuZG9tIFNhbXBsaW5nIFN1ZmZpY2VzOiBSZXRoaW5raW5nIERhdGEgU2VsZWN0aW9uIGluIFN1cGVydmlzZWQgRmluZS1UdW5pbmcgZm9yIENvZGUgR2VuZXJhdGlvbg==">Loading...</h4>
+                            <p class="text-xs mb-1" style="color: var(--text-secondary);">
+                                Ren-Biao Liu, Xin-Ye Li, <span class="author-highlight">Hui Sun</span>, Yali Du, Jiang-Tian Xue, Ming Li
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="publication-item" id="pub-p6">
+                        <div class="flex justify-center">
+                            <div class="pub-number">P6</div>
+                        </div>
+                        <div class="flex flex-wrap items-start gap-1">
+                            <span class="badge badge-preprint">Preprint</span>
+                            <!-- <span class="badge badge-gold">Tech Report</span> -->
+                            <!-- <span class="badge badge-gold">CCF-A</span> -->
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-bold text-sm mb-1" style="color: var(--primary-blue);">Ovis2.5 Technical Report</h4>
+                            <p class="text-xs mb-1" style="color: var(--text-secondary);">
+                                Ovis Team (Contributor: <span class="author-highlight">Hui Sun</span>), Alibaba Group
+                            </p>
+                            <p class="text-xs italic" style="color: var(--text-secondary);">Technical Report, arXiv: 2508.11737</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Journal Papers -->
+            <div class="mb-4">
+                <h3 class="text-base font-semibold serif mb-3" style="color: var(--text-secondary);">Journal Papers</h3>
+                <div>
+                    <div class="publication-item" id="pub-j1">
+                        <div class="flex justify-center">
+                            <div class="pub-number">J1</div>
+                        </div>
+                        <div class="flex flex-wrap items-start gap-1">
+                            <span class="badge">TSE 2025</span>
+                            <span class="badge badge-gold">CCF-A</span>
+                            <span class="badge badge-gold">SCI</span>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-bold text-sm mb-1" style="color: var(--primary-blue);">Post-Incorporating Code Structural Knowledge into Pretrained Models via ICL for Code Translation</h4>
+                            <p class="text-xs mb-1" style="color: var(--text-secondary);">
+                                Yali Du†, <span class="author-highlight">Hui Sun† (Equal Contribution)</span>, and Ming Li
+                            </p>
+                            <p class="text-xs italic" style="color: var(--text-secondary);">IEEE Transactions on Software Engineering, 2025</p>
+                        </div>
+                    </div>
+
+                    <div class="publication-item" id="pub-j2">
+                        <div class="flex justify-center">
+                            <div class="pub-number">J2</div>
+                        </div>
+                        <div class="flex flex-wrap items-start gap-1">
+                            <span class="badge">TORS 2024</span>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-bold text-sm mb-1" style="color: var(--primary-blue);">Learning Personalizable Clustered Embedding for Recommender Systems</h4>
+                            <p class="text-xs mb-1" style="color: var(--text-secondary);">
+                                Yizhou Chen, Guangda Huzhang, Anxiang Zeng, Qingtao Yu, <span class="author-highlight">Hui Sun</span>, Heng-Yi Li, Jingyi Li, Yabo Ni, Han Yu, and Zhiming Zhou
+                            </p>
+                            <p class="text-xs italic" style="color: var(--text-secondary);">ACM Transactions on Recommender Systems, 2024</p>
+                        </div>
+                    </div>
+
+                    <div class="publication-item" id="pub-j3">
+                        <div class="flex justify-center">
+                            <div class="pub-number">J3</div>
+                        </div>
+                        <div class="flex flex-wrap items-start gap-1">
+                            <span class="badge">SCIS 2023</span>
+                            <span class="badge badge-gold">CCF-A</span>
+                            <span class="badge badge-gold">SCI</span>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-bold text-sm mb-1" style="color: var(--primary-blue);">Enhancing Unsupervised Domain Adaptation by Exploiting the Conceptual Consistency of Multiple Self-supervised Tasks</h4>
+                            <p class="text-xs mb-1" style="color: var(--text-secondary);">
+                                <span class="author-highlight">Hui Sun</span>, and Ming Li
+                            </p>
+                            <p class="text-xs italic" style="color: var(--text-secondary);">SCIENCE CHINA Information Sciences, 2023, 66: 142101</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Conference Papers -->
+            <div class="mb-4">
+                <h3 class="text-base font-semibold serif mb-3" style="color: var(--text-secondary);">Conference Papers</h3>
+                <div>
+                    <div class="publication-item" id="pub-c1">
+                        <div class="flex justify-center">
+                            <div class="pub-number">C1</div>
+                        </div>
+                        <div class="flex flex-wrap items-start gap-1">
+                            <span class="badge">WWW 2026</span>
+                            <span class="badge badge-gold">CCF-A</span>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-bold text-sm mb-1" style="color: var(--primary-blue);">OneTrans: Unified Feature Interaction and Sequence Modeling with One Transformer in Industrial Recommender</h4>
+                            <p class="text-xs mb-1" style="color: var(--text-secondary);">
+                                Zhaoqi Zhang, Haolei Pei, Jun Guo, Tianyu Wang, Yufei Feng, <span class="author-highlight">Hui Sun</span>, Shaowei Liu, Aixin Sun
+                            </p>
+                            <p class="text-xs italic" style="color: var(--text-secondary);">The ACM Web Conference, 2026</p>
+                        </div>
+                    </div>
+
+                    <div class="publication-item" id="pub-c2">
+                        <div class="flex justify-center">
+                            <div class="pub-number">C2</div>
+                        </div>
+                        <div class="flex flex-wrap items-start gap-1">
+                            <span class="badge">AAAI 2026</span>
+                            <span class="badge badge-gold">CCF-A</span>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-bold text-sm mb-1" style="color: var(--primary-blue);">Dynamic-Static Synergistic Selection Method for Candidate Code Solutions with Generated Test Cases</h4>
+                            <p class="text-xs" style="color: var(--text-secondary);">
+                                Ren-Biao Liu, Jiang-Tian Xue, Chao-Zeng Ma, <span class="author-highlight">Hui Sun</span>, Xin-Ye Li, and Ming Li
+                            </p>
+                            <p class="text-xs italic" style="color: var(--text-secondary);">The 40th AAAI Conference on Artificial Intelligence, 2026</p>
+                        </div>
+                    </div>
+
+                    <div class="publication-item" id="pub-c3">
+                        <div class="flex justify-center">
+                            <div class="pub-number">C3</div>
+                        </div>
+                        <div class="flex flex-wrap items-start gap-1">
+                            <span class="badge">AAAI 2026</span>
+                            <span class="badge badge-gold">CCF-A</span>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-bold text-sm mb-1" style="color: var(--primary-blue);">ARBench: Algorithmic Reasoner or API Alchemist? Evaluating Code-Generating LLMs beyond API Calls</h4>
+                            <p class="text-xs" style="color: var(--text-secondary);">
+                                Ren-Biao Liu, Chao-Zeng Ma, An-Qi Li, <span class="author-highlight">Hui Sun</span>, Xin-Ye Li, and Ming Li
+                            </p>
+                            <p class="text-xs italic" style="color: var(--text-secondary);">The 40th AAAI Conference on Artificial Intelligence, 2026</p>
+                        </div>
+                    </div>
+
+                    <div class="publication-item" id="pub-c4">
+                        <div class="flex justify-center">
+                            <div class="pub-number">C4</div>
+                        </div>
+                        <div class="flex flex-wrap items-start gap-1">
+                            <span class="badge">ICCV 2025</span>
+                            <span class="badge badge-gold">CCF-A</span>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-bold text-sm mb-1" style="color: var(--primary-blue);">MDP3: A Training-free Approach for List-wise Frame Selection in Video-LLMs</h4>
+                            <p class="text-xs mb-1" style="color: var(--text-secondary);">
+                                <span class="author-highlight">Hui Sun</span>, Shiyin Lu, Huanyu Wang, Qing-Guo Chen, Zhao Xu, Weihua Luo, Kaifu Zhang, Ming Li
+                            </p>
+                            <p class="text-xs italic" style="color: var(--text-secondary);">IEEE/CVF International Conference on Computer Vision, 2025</p>
+                        </div>
+                    </div>
+
+                    <div class="publication-item" id="pub-c5">
+                        <div class="flex justify-center">
+                            <div class="pub-number">C5</div>
+                        </div>
+                        <div class="flex flex-wrap items-start gap-1">
+                            <span class="badge">ICML 2025</span>
+                            <span class="badge badge-gold">CCF-A</span>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-bold text-sm mb-1" style="color: var(--primary-blue);">Revisiting Chain-of-Thought in Code Generation: Do Language Models Need to Learn Reasoning before Coding?</h4>
+                            <p class="text-xs mb-1" style="color: var(--text-secondary);">
+                                Ren-Biao Liu, An-Qi Li, Chao-Ding Yang, <span class="author-highlight">Hui Sun</span>, and Ming Li
+                            </p>
+                            <p class="text-xs italic" style="color: var(--text-secondary);">The 42nd International Conference on Machine Learning, 2025</p>
+                        </div>
+                    </div>
+
+                    <div class="publication-item" id="pub-c6">
+                        <div class="flex justify-center">
+                            <div class="pub-number">C6</div>
+                        </div>
+                        <div class="flex flex-wrap items-start gap-1">
+                            <span class="badge">ASE 2024</span>
+                            <span class="badge badge-gold">CCF-A</span>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-bold text-sm mb-1" style="color: var(--primary-blue);">A Joint Learning Model with Variational Interaction for Multilingual Program Translation</h4>
+                            <p class="text-xs mb-1" style="color: var(--text-secondary);">
+                                Yali Du, <span class="author-highlight">Hui Sun</span>, and Ming Li
+                            </p>
+                            <p class="text-xs italic" style="color: var(--text-secondary);">IEEE/ACM 46th International Conference on Automated Software Engineering, 2024</p>
+                        </div>
+                    </div>
+
+                    <div class="publication-item" id="pub-c7">
+                        <div class="flex justify-center">
+                            <div class="pub-number">C7</div>
+                        </div>
+                        <div class="flex flex-wrap items-start gap-1">
+                            <span class="badge">ICML 2024</span>
+                            <span class="badge badge-gold">CCF-A</span>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-bold text-sm mb-1" style="color: var(--primary-blue);">Ambiguity-Aware Abductive Learning</h4>
+                            <p class="text-xs mb-1" style="color: var(--text-secondary);">
+                                Hao-Yuan He, <span class="author-highlight">Hui Sun</span>, Zheng Xie, and Ming Li
+                            </p>
+                            <p class="text-xs italic" style="color: var(--text-secondary);">The 41st International Conference on Machine Learning, 2024</p>
+                        </div>
+                    </div>
+
+                    <div class="publication-item" id="pub-c8">
+                        <div class="flex justify-center">
+                            <div class="pub-number">C8</div>
+                        </div>
+                        <div class="flex flex-wrap items-start gap-1">
+                            <span class="badge">AAAI 2023</span>
+                            <span class="badge badge-gold">CCF-A</span>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-bold text-sm mb-1" style="color: var(--primary-blue);">Cooperative and Adversarial Learning: Co-Enhancing Discriminability and Transferability in Domain Adaptation</h4>
+                            <p class="text-xs mb-1" style="color: var(--text-secondary);">
+                                <span class="author-highlight">Hui Sun</span>, Zheng Xie, Xin-Ye Li, and Ming Li
+                            </p>
+                            <p class="text-xs italic" style="color: var(--text-secondary);">The 37th AAAI Conference on Artificial Intelligence, 2023</p>
+                        </div>
+                    </div>
+
+                    <div class="publication-item" id="pub-c9">
+                        <div class="flex justify-center">
+                            <div class="pub-number">C9</div>
+                        </div>
+                        <div class="flex flex-wrap items-start gap-1">
+                            <span class="badge">AAAI 2023</span>
+                            <span class="badge badge-gold">CCF-A</span>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-bold text-sm mb-1" style="color: var(--primary-blue);">Semi-Supervised Learning with Support Isolation by Small-Paced Self-Training</h4>
+                            <p class="text-xs mb-1" style="color: var(--text-secondary);">
+                                Zheng Xie, <span class="author-highlight">Hui Sun</span>, and Ming Li
+                            </p>
+                            <p class="text-xs italic" style="color: var(--text-secondary);">The 37th AAAI Conference on Artificial Intelligence, 2023</p>
+                        </div>
+                    </div>
+
+                    <div class="publication-item" id="pub-c10">
+                        <div class="flex justify-center">
+                            <div class="pub-number">C10</div>
+                        </div>
+                        <div class="flex flex-wrap items-start gap-1">
+                            <span class="badge">WWW 2023</span>
+                            <span class="badge badge-gold">CCF-A</span>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-bold text-sm mb-1" style="color: var(--primary-blue);">Clustered Embedding Learning for Recommender Systems</h4>
+                            <p class="text-xs mb-1" style="color: var(--text-secondary);">
+                                Yizhou Chen, Guangda Huzhang, Anxiang Zeng, Qingtao Yu, <span class="author-highlight">Hui Sun</span>, Heng-Yi Li, Jingyi Li, Yabo Ni, Han Yu, and Zhiming Zhou
+                            </p>
+                            <p class="text-xs italic" style="color: var(--text-secondary);">The World Wide Web Conference, 2023</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Patents -->
+            <div>
+                <h3 class="text-base font-semibold serif mb-3" style="color: var(--text-secondary);">Patents</h3>
+                <div class="publication-item" id="pub-pt1">
+                    <div class="flex justify-center">
+                        <div class="pub-number">PT1</div>
+                    </div>
+                    <div class="flex flex-wrap items-start gap-1">
+                        <span class="badge badge-gold">已授权</span>
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="font-bold text-sm mb-1" style="color: var(--primary-blue);">一种面向环境变化的无监督迁移学习图像分类算法</h4>
+                        <p class="text-xs mb-1" style="color: var(--text-secondary);">
+                            Ming Li (黎铭), <span class="author-highlight">Hui Sun (孙辉)</span>, Zhi-Hua Zhou (周志华)
+                        </p>
+                        <p class="text-xs italic" style="color: var(--text-secondary);">Patent No. 202210461879.4</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Awards & Honors -->
+        <div class="card p-6" id="awards">
+            <h2 class="text-xl font-bold serif mb-1 inline-flex items-center gap-2" style="color: var(--primary-blue);">
+                <i class="fas fa-trophy"></i>
+                Awards & Honors
+            </h2>
+            <div class="section-divider"></div>
+            
+            <div class="grid md:grid-cols-2 gap-3">
+                 <div class="award-item">
+                    <div class="award-icon" style="color: #f59e0b;">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-sm font-bold mb-1" style="color: var(--primary-blue);">ByteDance Soaring Star Talent Program</p>
+                        <p class="text-xs mb-1" style="font-weight: 600;">筋斗云人才计划</p>
+                        <p class="text-xs" style="color: var(--text-secondary);">ByteDance · Apr 2025</p>
+                    </div>
+                </div>
+
+                <div class="award-item">
+                    <div class="award-icon" style="color: #f59e0b;">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-sm font-bold mb-1" style="color: var(--primary-blue);">Value Star Awards</p>
+                        <p class="text-xs mb-1" style="font-weight: 600;">Top 4% (8 out of 200+)</p>
+                        <p class="text-xs" style="color: var(--text-secondary);">Shopee · Dec 2022</p>
+                    </div>
+                </div>
+                
+                <div class="award-item">
+                    <div class="award-icon" style="color: var(--primary-blue);">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-sm font-bold mb-1" style="color: var(--primary-blue);">Artificial Intelligence Scholarship</p>
+                        <p class="text-xs mb-1" style="font-weight: 600;">50 recipients university-wide per year</p>
+                        <p class="text-xs" style="color: var(--text-secondary);">Nanjing University · Oct 2019</p>
+                    </div>
+                </div>
+                
+                <div class="award-item">
+                    <div class="award-icon" style="color: #f59e0b;">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-sm font-bold mb-1" style="color: var(--primary-blue);">China Collegiate Computing Contest (CCCC)</p>
+                        <p class="text-xs mb-1" style="color: #f59e0b; font-weight: 600;">Outstanding Winner (Highest Honor)</p>
+                        <p class="text-xs" style="color: var(--text-secondary);">Jilin Province · Mar 2018</p>
+                    </div>
+                </div>
+                
+                <div class="award-item">
+                    <div class="award-icon" style="color: #9ca3af;">
+                        <i class="fas fa-medal"></i>
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-sm font-bold mb-1" style="color: var(--primary-blue);">ACM-ICPC Asia Regional Contest</p>
+                        <p class="text-xs mb-1" style="color: #9ca3af; font-weight: 600;">Silver Medal</p>
+                        <p class="text-xs" style="color: var(--text-secondary);">Nanning · Dec 2017</p>
+                    </div>
+                </div>
+                
+                <div class="award-item">
+                    <div class="award-icon" style="color: #cd7f32;">
+                        <i class="fas fa-medal"></i>
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-sm font-bold mb-1" style="color: var(--primary-blue);">ACM-ICPC Asia EC-Final</p>
+                        <p class="text-xs mb-1" style="color: #cd7f32; font-weight: 600;">Bronze Medal</p>
+                        <p class="text-xs" style="color: var(--text-secondary);">Shanghai · Dec 2017</p>
+                    </div>
+                </div>
+                
+                <div class="award-item">
+                    <div class="award-icon" style="color: #f59e0b;">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-sm font-bold mb-1" style="color: var(--primary-blue);">Jilin Province Collegiate Programming Contest</p>
+                        <p class="text-xs mb-1" style="color: #f59e0b; font-weight: 600;">Gold Medal</p>
+                        <p class="text-xs" style="color: var(--text-secondary);">Changchun · May 2017</p>
+                    </div>
+                </div>
+                
+                <div class="award-item">
+                    <div class="award-icon" style="color: #f59e0b;">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-sm font-bold mb-1" style="color: var(--primary-blue);">Northeast Collegiate Programming Contest</p>
+                        <p class="text-xs mb-1" style="color: #f59e0b; font-weight: 600;">Gold Medal</p>
+                        <p class="text-xs" style="color: var(--text-secondary);">Changchun · Sep 2016</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Work Experience -->
+        <div class="card p-6" id="experience">
+            <h2 class="text-xl font-bold serif mb-1 inline-flex items-center gap-2" style="color: var(--primary-blue);">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd"></path><path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z"></path></svg>
+                Work Experience
+            </h2>
+            <div class="section-divider"></div>
+            
+            <div class="space-y-4">
+                <!-- ByteDance TikTok E-commerce -->
+                <div class="company-card bytedance" id="experience_tiktok">
+                    <div class="company-header">
+                        <div class="flex items-center gap-3">
+                            <div>
+                                <h3 class="text-base font-bold inline-flex items-center gap-2" style="color: var(--primary-blue);">
+                                    <i class="fas fa-building"></i>
+                                    ByteDance - TikTok E-commerce
+                                </h3>
+                                <p class="text-sm" style="color: var(--text-secondary);"><strong>Rec. Algorithm Intern</strong> | LLM for E-commerce Rec. - Soaring Star Talent Program (筋斗云人才计划)</p>
+                            </div>
+                        </div>
+                        <span class="time-tag">
+                            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+                            Jul 2025 - Present
+                        </span>
+                    </div>
+                    
+                    <p class="text-sm mb-3" style="color: var(--text-secondary);">
+                        Working on the complexification of large-scale recommendation models for TikTok Shop fine-ranking, focusing on integrating advanced deep learning techniques to improve recommendation quality and business metrics across multiple scenarios. Contributed as co-author to a WWW'26 paper on LLM-enhanced e-commerce recommendation systems.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 md:grid-cols-5 gap-3 mb-3">
+                        <div class="highlight-card">
+                            <i class="fas fa-chart-line card-icon" style="color: var(--primary-blue);"></i>
+                            <span class="highlight-number">+1.36%</span>
+                            <p class="text-xs font-semibold" style="color: var(--primary-blue);">GMV/u</p>
+                            <p class="text-xs" style="color: var(--text-secondary);">E-commerce Overall</p>
+                        </div>
+                        <div class="highlight-card">
+                            <i class="fas fa-chart-line card-icon" style="color: var(--primary-blue);"></i>
+                            <span class="highlight-number">+1.35%</span>
+                            <p class="text-xs font-semibold" style="color: var(--primary-blue);">GMV/u</p>
+                            <p class="text-xs" style="color: var(--text-secondary);">TikTok Shop Overall</p>
+                        </div>
+                        <div class="highlight-card">
+                            <i class="fas fa-arrow-up card-icon" style="color: var(--primary-blue);"></i>
+                            <span class="highlight-number">+1.77%</span>
+                            <p class="text-xs font-semibold" style="color: var(--primary-blue);">GMV/u</p>
+                            <p class="text-xs" style="color: var(--text-secondary);">Mall Overall</p>
+                        </div>
+                        <div class="highlight-card">
+                            <i class="fas fa-rocket card-icon" style="color: var(--primary-blue);"></i>
+                            <span class="highlight-number">+2.47%</span>
+                            <p class="text-xs font-semibold" style="color: var(--primary-blue);">GMV/u</p>
+                            <p class="text-xs" style="color: var(--text-secondary);">Mall Feeds</p>
+                        </div>
+                        <div class="highlight-card">
+                            <i class="fas fa-file-alt card-icon" style="color: var(--primary-blue);"></i>
+                            <span class="highlight-number">WWW'26</span>
+                            <p class="text-xs font-semibold" style="color: var(--primary-blue);">Conference Paper</p>
+                            <p class="text-xs" style="color: var(--text-secondary);">Contributor</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Alibaba AIDC -->
+                <div class="company-card alibaba" id="experience_AIDC">
+                    <div class="company-header">
+                        <div class="flex items-center gap-3">
+                            <div>
+                                <h3 class="text-base font-bold inline-flex items-center gap-2" style="color: var(--primary-blue);">
+                                    <i class="fas fa-building"></i>
+                                    Alibaba AIDC - Ovis Team
+                                </h3>
+                                <p class="text-sm" style="color: var(--text-secondary);"><strong>LLM Researcher</strong> | Multimodal LLM Research</p>
+                            </div>
+                        </div>
+                        <span class="time-tag">
+                            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+                            Sep 2023 - Jun 2025
+                        </span>
+                    </div>
+                    
+                    <p class="text-sm mb-3" style="color: var(--text-secondary);">
+                        As a key developer, I contributed to Ovis V1.6, V2.0, and V2.5. Primarily responsible for developing video understanding capabilities from scratch (including data preparation, algorithm design, and model training), contributing to the SFT for the Ovis GUI Agent with a focus on optimizing GUI & general grounding, and collecting trajectory data for the agent's web-based operations.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-3">
+                        <div class="highlight-card">
+                            <i class="fas fa-ranking-star card-icon" style="color: var(--primary-blue);"></i>
+                            <span class="highlight-number">#1</span>
+                            <p class="text-xs font-semibold" style="color: var(--primary-blue);">Ovis 2.5</p>
+                            <p class="text-xs" style="color: var(--text-secondary);">&lt;40B params</p>
+                        </div>
+                        <div class="highlight-card">
+                            <i class="fas fa-ranking-star card-icon" style="color: var(--primary-blue);"></i>
+                            <span class="highlight-number">#2</span>
+                            <p class="text-xs font-semibold" style="color: var(--primary-blue);">Ovis 2.0</p>
+                            <p class="text-xs" style="color: var(--text-secondary);">OpenCompass</p>
+                        </div>
+                        <div class="highlight-card">
+                            <i class="fas fa-file-alt card-icon" style="color: var(--primary-blue);"></i>
+                            <span class="highlight-number">ICCV'25</span>
+                            <p class="text-xs font-semibold" style="color: var(--primary-blue);">MDP3</p>
+                            <p class="text-xs" style="color: var(--text-secondary);">First-author</p>
+                        </div>
+                        <div class="highlight-card">
+                            <i class="fas fa-file-code card-icon" style="color: var(--primary-blue);"></i>
+                            <span class="highlight-number">Tech Report</span>
+                            <p class="text-xs font-semibold" style="color: var(--primary-blue);">Ovis2.5</p>
+                            <p class="text-xs" style="color: var(--text-secondary);">Contributor</p>
+                        </div>
+                    </div>
+                    
+                    <div class="achievement-box">
+                        <p class="font-semibold text-sm mb-2 inline-flex items-center gap-1" style="color: var(--primary-blue);">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z" clip-rule="evenodd"></path></svg>
+                            Related Links
+                        </p>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-1">
+                            <p class="text-xs" style="color: var(--text-secondary);">• <a href="https://mp.weixin.qq.com/s/VSoNGYDezw0XStQkUgwPgw" class="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">Ovis 2.5 on HF官方公众号</a></p>
+                            <p class="text-xs" style="color: var(--text-secondary);">• <a href="https://mp.weixin.qq.com/s/jYy6aim-r4HIZAZJfsEjgw" class="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">Ovis 2.0 on HF官方公众号</a></p>
+                            <p class="text-xs" style="color: var(--text-secondary);">• <a href="https://mp.weixin.qq.com/s/VLvF4J-8CsBN6Wam5UlVXQ" class="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">Ovis 1.6 on 量子位头条</a></p>
+                            <p class="text-xs" style="color: var(--text-secondary);">• <a href="https://huggingface.co/collections/AIDC-AI/ovis25-689ec1474633b2aab8809335" class="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">Ovis 2.5 on HuggingFace</a></p>
+                            <p class="text-xs" style="color: var(--text-secondary);">• <a href="https://huggingface.co/collections/AIDC-AI/ovis2-67ab36c7e497429034874464" class="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">Ovis 2.0 on HuggingFace</a></p>
+                            <p class="text-xs" style="color: var(--text-secondary);">• <a href="https://huggingface.co/collections/AIDC-AI/ovis16-66eadbe52f79fb99cc122c08" class="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">Ovis 1.6 on HuggingFace</a></p>
+                            <p class="text-xs" style="color: var(--text-secondary);">• <a href="https://huggingface.co/collections/AIDC-AI/ovis15-66a7a9848a3a0a84df1ccc25" class="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">Ovis 1.5 on HuggingFace</a></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Shopee -->
+                <div class="company-card shopee" id="experience_shopee">
+                    <div class="company-header">
+                        <div class="flex items-center gap-3">
+                            <div>
+                                <h3 class="text-base font-bold inline-flex items-center gap-2" style="color: var(--primary-blue);">
+                                    <i class="fas fa-building"></i>
+                                    Shopee (Sea Limited)
+                                </h3>
+                                <p class="text-sm" style="color: var(--text-secondary);"><strong>Algorithm Engineer (Full-time)</strong> | Ranking for E-commerce Search</p>
+                            </div>
+                        </div>
+                        <span class="time-tag">
+                            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+                            Jul 2022 - Aug 2023
+                        </span>
+                    </div>
+
+                    <p class="text-sm mb-3" style="color: var(--text-secondary);">
+                        Primarily responsible for maintaining and optimizing the foundational E-commerce search ranking model, initially used in fine-ranking and extended to recall, coarse-ranking, and long-tail scenarios. Key work includes:
+                    </p>
+                   
+                    <div class="text-sm mb-2" style="color: var(--text-secondary);">
+                        <strong style="color: var(--primary-blue);">Algorithm Improvements:</strong> 
+                    </div>
+                    
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-3">
+                        <div class="highlight-card">
+                            <i class="fas fa-chart-line card-icon" style="color: var(--primary-blue);"></i>
+                            <span class="highlight-number">+0.6%</span>
+                            <p class="text-xs font-semibold" style="color: var(--primary-blue);">CEL - CTR AUC</p>
+                            <p class="text-xs" style="color: var(--text-secondary);">Embedding Learning</p>
+                        </div>
+                        <div class="highlight-card">
+                            <i class="fas fa-chart-line card-icon" style="color: var(--primary-blue);"></i>
+                            <span class="highlight-number">+0.5%</span>
+                            <p class="text-xs font-semibold" style="color: var(--primary-blue);">PLE - CTR AUC</p>
+                            <p class="text-xs" style="color: var(--text-secondary);">Multi-task</p>
+                        </div>
+                        <div class="highlight-card">
+                            <i class="fas fa-chart-line card-icon" style="color: var(--primary-blue);"></i>
+                            <span class="highlight-number">+0.2%</span>
+                            <p class="text-xs font-semibold" style="color: var(--primary-blue);">AutoDis - CTR</p>
+                            <p class="text-xs" style="color: var(--text-secondary);">Numeric feature</p>
+                        </div>
+                        <div class="highlight-card">
+                            <i class="fas fa-chart-line card-icon" style="color: var(--primary-blue);"></i>
+                            <span class="highlight-number">+0.3%</span>
+                            <p class="text-xs font-semibold" style="color: var(--primary-blue);">AutoDis - CVR</p>
+                            <p class="text-xs" style="color: var(--text-secondary);">Numeric feature</p>
+                        </div>
+                    </div>
+
+                    <div class="text-sm mb-2" style="color: var(--text-secondary);">
+                        <strong style="color: var(--primary-blue);">Model Infastruceture Maintenance:</strong> deconstructing neural networks into configurable blocks for faster convergence and sharing user-side computations to improve speed.
+                    </div>
+                    
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-2 mb-3">
+                        <div class="highlight-card">
+                            <i class="fas fa-clock card-icon" style="color: var(--primary-blue);"></i>
+                            <span class="highlight-number">2+m →1week</span>
+                            <p class="text-xs font-semibold" style="color: var(--primary-blue);">Data to Convergence</p>
+                            <p class="text-xs" style="color: var(--text-secondary);">Module-wise Model Resue</p>
+                        </div>
+                        <div class="highlight-card">
+                            <i class="fas fa-rocket card-icon" style="color: var(--primary-blue);"></i>
+                            <span class="highlight-number">+105%</span>
+                            <p class="text-xs font-semibold" style="color: var(--primary-blue);">Training Speed</p>
+                            <p class="text-xs" style="color: var(--text-secondary);">37→76 samples/(cpu·s)</p>
+                        </div>
+                        <div class="highlight-card">
+                            <i class="fas fa-bolt card-icon" style="color: var(--primary-blue);"></i>
+                            <span class="highlight-number">+232%</span>
+                            <p class="text-xs font-semibold" style="color: var(--primary-blue);">Inference Speed</p>
+                            <p class="text-xs" style="color: var(--text-secondary);">95.5ms→28.8ms</p>
+                        </div>
+                        <div class="highlight-card">
+                            <i class="fas fa-tachometer-alt card-icon" style="color: var(--primary-blue);"></i>
+                            <span class="highlight-number">10x</span>
+                            <p class="text-xs font-semibold" style="color: var(--primary-blue);">CEL Speed</p>
+                            <p class="text-xs" style="color: var(--text-secondary);">Real-world impl.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AliExpress -->
+                <div class="company-card alibaba" id="experience_AE">
+                    <div class="company-header">
+                        <div class="flex items-center gap-3">
+                            <div>
+                                <h3 class="text-base font-bold inline-flex items-center gap-2" style="color: var(--primary-blue);">
+                                    <i class="fas fa-building"></i>
+                                    AliExpress (Alibaba Group)
+                                </h3>
+                                <p class="text-sm" style="color: var(--text-secondary);"><strong>Algorithm Engineer</strong> (Intern) | Ranking for E-commerce Recommendation</p>
+                            </div>
+                        </div>
+                        <span class="time-tag">
+                            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+                            Jun 2021 - Sep 2021
+                        </span>
+                    </div>
+                    
+                    <p class="text-sm mb-3" style="color: var(--text-secondary);">
+                        Designed a country-specific multitask fine-ranking model for multinational e-commerce platform. During the internship, reproduced 14 papers and finally adopted PLE, ESMM, and Gradient Block to optimize the multitask framework. Designed country-level PLE in the top network to capture specific information of the top 5 key countries, and used DCN-v2 in the bottom network to achieve higher-order feature crossover for country-differentiated features.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 md:grid-cols-5 gap-2">
+                        <div class="highlight-card">
+                            <i class="fas fa-book card-icon" style="color: var(--primary-blue);"></i>
+                            <span class="highlight-number">14</span>
+                            <p class="text-xs font-semibold" style="color: var(--primary-blue);">Reproduced Papers</p>
+                        </div>
+                        <div class="highlight-card">
+                            <i class="fas fa-arrow-up card-icon" style="color: var(--primary-blue);"></i>
+                            <span class="highlight-number">+0.50%</span>
+                            <p class="text-xs font-semibold" style="color: var(--primary-blue);">CTR AUC</p>
+                        </div>
+                        <div class="highlight-card">
+                            <i class="fas fa-arrow-up card-icon" style="color: var(--primary-blue);"></i>
+                            <span class="highlight-number">+0.78%</span>
+                            <p class="text-xs font-semibold" style="color: var(--primary-blue);">CTR GAUC</p>
+                        </div>
+                        <div class="highlight-card">
+                            <i class="fas fa-arrow-up card-icon" style="color: var(--primary-blue);"></i>
+                            <span class="highlight-number">+0.53%</span>
+                            <p class="text-xs font-semibold" style="color: var(--primary-blue);">L2P AUC</p>
+                        </div>
+                        <div class="highlight-card">
+                            <i class="fas fa-arrow-up card-icon" style="color: var(--primary-blue);"></i>
+                            <span class="highlight-number">+1.17%</span>
+                            <p class="text-xs font-semibold" style="color: var(--primary-blue);">L2P GAUC</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ByteDance -->
+                <div class="company-card bytedance" id="experience_bytedance">
+                    <div class="company-header">
+                        <div class="flex items-center gap-3">
+                            <div>
+                                <h3 class="text-base font-bold inline-flex items-center gap-2" style="color: var(--primary-blue);">
+                                    <i class="fas fa-building"></i>
+                                    ByteDance
+                                </h3>
+                                <p class="text-sm" style="color: var(--text-secondary);"><strong>Search Algorithm Engineer</strong> (Intern) | Toutiao Series Apps</p>
+                            </div>
+                        </div>
+                        <span class="time-tag">
+                            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+                            Oct 2018 - Mar 2019
+                        </span>
+                    </div>
+                    
+                    <p class="text-sm mb-3" style="color: var(--text-secondary);">
+                        Mainly responsible for the official user search in ByteDance's "Toutiao" series apps (Toutiao, Xigua Video, DongCheDi, etc.), including the vertical search results under the user search tab, and the user card result under the all web search and video search tab.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                        <div class="highlight-card">
+                            <i class="fas fa-percentage card-icon" style="color: var(--primary-blue);"></i>
+                            <span class="highlight-number">+30%</span>
+                            <p class="text-xs font-semibold" style="color: var(--primary-blue);">CTR of query</p>
+                            <p class="text-xs" style="color: var(--text-secondary);">15%→45%</p>
+                        </div>
+                        <div class="highlight-card">
+                            <i class="fas fa-search card-icon" style="color: var(--primary-blue);"></i>
+                            <span class="highlight-number">+60%</span>
+                            <p class="text-xs font-semibold" style="color: var(--primary-blue);">Card Recall Ratio</p>
+                            <p class="text-xs" style="color: var(--text-secondary);">User cards</p>
+                        </div>
+                        <div class="highlight-card">
+                            <i class="fas fa-mouse-pointer card-icon" style="color: var(--primary-blue);"></i>
+                            <span class="highlight-number">+5%</span>
+                            <p class="text-xs font-semibold" style="color: var(--primary-blue);">Top 3 CTR</p>
+                            <p class="text-xs" style="color: var(--text-secondary);">User cards</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Education -->
+        <div class="card p-6" id="education">
+            <h2 class="text-xl font-bold serif mb-1 inline-flex items-center gap-2" style="color: var(--primary-blue);">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"></path></svg>
+                Education
+            </h2>
+            <div class="section-divider"></div>
+            
+            <div class="space-y-3">
+                <div class="edu-card">
+                    <div class="flex-1">
+                        <p class="font-bold text-base mb-1">
+                            <a href="http://www.nju.edu.cn/" target="_blank" rel="noopener noreferrer" class="text-blue-800 hover:underline inline-flex items-center gap-1">
+                                Nanjing University (南京大学)
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="external-link-icon">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-4.5 0L18 3m0 0h-5.25M18 3v5.25" />
+                                </svg>
+                            </a>
+                        </p>
+                        <p class="text-sm mb-1" style="color: var(--text-secondary);">Ph.D. in Computer Science and Technology, 
+                            <a href="http://ai.nju.edu.cn/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline inline-flex items-center gap-1">
+                                Schoolar of Artificial Intelligence
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="external-link-icon">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-4.5 0L18 3m0 0h-5.25M18 3v5.25" />
+                                </svg>
+                            </a>
+                        </p>
+                        <p class="text-sm" style="color: var(--text-secondary);">
+                            <a href="https://www.lamda.nju.edu.cn/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline inline-flex items-center gap-1">
+                                LAMDA Group
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="external-link-icon">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-4.5 0L18 3m0 0h-5.25M18 3v5.25" />
+                                </svg>
+                            </a>
+                             · Supervisor: 
+                            <a href="http://palm.nju.edu.cn/lim/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline inline-flex items-center gap-1">
+                                Prof. Ming Li (黎铭)
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="external-link-icon">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-4.5 0L18 3m0 0h-5.25M18 3v5.25" />
+                                </svg>
+                            </a>
+                        </p>
+                    </div>
+                    <span class="time-tag">
+                        <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+                        2023 - Present
+                    </span>
+                </div>
+
+                <div class="edu-card">
+                    <div class="flex-1">
+                        <p class="font-bold text-base mb-1">
+                            <a href="http://www.nju.edu.cn/" target="_blank" rel="noopener noreferrer" class="text-blue-800 hover:underline inline-flex items-center gap-1">
+                                Nanjing University (南京大学)
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="external-link-icon">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-4.5 0L18 3m0 0h-5.25M18 3v5.25" />
+                                </svg>
+                            </a>
+                        </p>
+                        <p class="text-sm mb-1" style="color: var(--text-secondary);">M.Sc. in Computer Science and Technology, 
+                            <a href="http://ai.nju.edu.cn/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline inline-flex items-center gap-1">
+                                Schoolar of Artificial Intelligence
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="external-link-icon">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-4.5 0L18 3m0 0h-5.25M18 3v5.25" />
+                                </svg>
+                            </a>
+                        </p>
+                        <p class="text-sm" style="color: var(--text-secondary);">
+                        Recommended admission (without entrance exam); <strong>Ranked 1st</strong> in coding test during interview.</p>
+                    </div>
+                    <span class="time-tag">
+                        <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+                        2019 - 2022
+                    </span>
+                </div>
+
+                <div class="edu-card">
+                    <div class="flex-1">
+                        <p class="font-bold text-base mb-1">
+                            <a href="https://www.jlu.edu.cn/" target="_blank" rel="noopener noreferrer" class="text-blue-800 hover:underline inline-flex items-center gap-1">
+                                Jilin University (吉林大学)
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="external-link-icon">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-4.5 0L18 3m0 0h-5.25M18 3v5.25" />
+                                </svg>
+                            </a>
+                        </p>
+                        <p class="text-sm mb-1" style="color: var(--text-secondary);">B.Sc. in 
+                            <a href="https://csw.jlu.edu.cn/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline inline-flex items-center gap-1">
+                                Software Engineering
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="external-link-icon">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-4.5 0L18 3m0 0h-5.25M18 3v5.25" />
+                                </svg>
+                            </a>
+                             (Excellent Engineer Program)
+                        </p>
+                        <p class="text-sm" style="color: var(--text-secondary);">GPA: 3.7/4.0 (Top 5%) · Exchange: ITMO University, Russia (2017)</p>
+                    </div>
+                    <span class="time-tag">
+                        <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+                        2015 - 2019
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Teaching Assistant -->
+        <div class="card p-6" id="teaching">
+            <h2 class="text-xl font-bold serif mb-1 inline-flex items-center gap-2" style="color: var(--primary-blue);">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
+                Teaching Assistant
+            </h2>
+            <div class="section-divider"></div>
+            <div class="text-sm space-y-2" style="color: var(--text-secondary);">
+                <p>• <strong><a href="https://www.lamda.nju.edu.cn/lim/teaching.html" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline inline-flex items-center gap-1">
+                    Artificial Intelligence Guidance
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="external-link-icon">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-4.5 0L18 3m0 0h-5.25M18 3v5.25" />
+                    </svg>
+                </a></strong> (With Prof. Ming Li; Fall 2025)</p>
+                <p>• <strong><a href="https://www.lamda.nju.edu.cn/lim/teaching.html" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline inline-flex items-center gap-1">
+                    Data Mining for Complex Data Objects
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="external-link-icon">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-4.5 0L18 3m0 0h-5.25M18 3v5.25" />
+                    </svg>
+                </a></strong> (With Prof. Ming Li; Fall 2021)</p>
+                <p>• <strong><a href="https://www.lamda.nju.edu.cn/lim/teaching.html" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline inline-flex items-center gap-1">
+                    Introduction to Data Mining
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="external-link-icon">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-4.5 0L18 3m0 0h-5.25M18 3v5.25" />
+                    </svg>
+                </a></strong> (With Prof. Ming Li; Spring 2020)</p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="text-center text-xs py-4" style="color: var(--text-secondary);">
+            © 2025 Hui Sun (孙辉). Last updated: November 2025
+        </div>
+    </div>
+
+    <script>
+        // ========================================
+        // 汉堡菜单控制
+        // ========================================
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburgerMenu = document.getElementById('hamburgerMenu');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+            const mobileMenuClose = document.getElementById('mobileMenuClose');
+            const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
+            
+            // 打开菜单
+            function openMenu() {
+                mobileMenu.classList.add('active');
+                mobileMenuOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+            
+            // 关闭菜单
+            function closeMenu() {
+                mobileMenu.classList.remove('active');
+                mobileMenuOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+            
+            // 点击汉堡菜单按钮
+            if (hamburgerMenu) {
+                hamburgerMenu.addEventListener('click', openMenu);
+            }
+            
+            // 点击关闭按钮
+            if (mobileMenuClose) {
+                mobileMenuClose.addEventListener('click', closeMenu);
+            }
+            
+            // 点击遮罩层
+            if (mobileMenuOverlay) {
+                mobileMenuOverlay.addEventListener('click', closeMenu);
+            }
+            
+            // 点击菜单链接后关闭菜单
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', closeMenu);
+            });
+        });
+        
+        // ========================================
+        // 加载动画控制
+        // ========================================
+        window.addEventListener('load', function() {
+            const loading = document.getElementById('loading');
+            setTimeout(function() {
+                loading.classList.add('hidden');
+            }, 300);
+        });
+        
+        // ========================================
+        // 修复:解密base64编码的标题（修复了bug）
+        // ========================================
+        document.addEventListener('DOMContentLoaded', function() {
+            const encryptedTitles = document.querySelectorAll('.encrypted-title');
+            encryptedTitles.forEach(function(el) {
+                // 修复：改为 data-encrypted 而不是 data-title
+                const encrypted = el.getAttribute('data-encrypted');
+                if (encrypted) {
+                    try {
+                        el.textContent = atob(encrypted);
+                    } catch (e) {
+                        console.error('Failed to decode title:', e);
+                        el.textContent = 'Error decoding title';
+                    }
+                }
+            });
+        });
+        
+        // ========================================
+        // 时间轴动态连线（已优化）
+        // ========================================
+        function drawTimelineConnections() {
+            const svg = document.getElementById('timelineConnections');
+            const container = document.getElementById('timelineDualTrack');
+            
+            if (!svg || !container) return;
+            
+            // 清空现有连线
+            svg.innerHTML = '';
+            
+            // 获取容器尺寸
+            const containerRect = container.getBoundingClientRect();
+            svg.setAttribute('width', containerRect.width);
+            svg.setAttribute('height', containerRect.height);
+            
+            // 教育卡片连线颜色 - 紫色渐变系（从浅到深）
+            const eduColors = ['#c084fc', '#a78bfa', '#8b5cf6'];
+            
+            // 绘制教育卡片连线
+            const eduCards = container.querySelectorAll('.timeline-education-track .timeline-event-card');
+            const eduBars = container.querySelectorAll('.timeline-segment.education');
+            
+            eduCards.forEach((card, index) => {
+                if (eduBars[index]) {
+                    const cardRect = card.getBoundingClientRect();
+                    const barRect = eduBars[index].getBoundingClientRect();
+                    
+                    // 卡片底部中心
+                    const x1 = cardRect.left + cardRect.width / 2 - containerRect.left;
+                    const y1 = cardRect.bottom - containerRect.top;
+                    
+                    // bar顶部中心
+                    const x2 = barRect.left + barRect.width / 2 - containerRect.left;
+                    const y2 = barRect.top - containerRect.top;
+                    
+                    // 绘制二次贝塞尔曲线
+                    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                    const controlY = (y1 + y2) / 2;
+                    const d = `M ${x1} ${y1} Q ${x1} ${controlY}, ${x2} ${y2}`;
+                    path.setAttribute('d', d);
+                    path.setAttribute('stroke', eduColors[index] || '#8b5cf6');
+                    path.setAttribute('class', 'timeline-connection-path');
+                    svg.appendChild(path);
+                }
+            });
+            
+            // 工作卡片连线颜色 - 蓝色渐变系（从浅到深）
+            const workColors = ['#93c5fd', '#60a5fa', '#3b82f6', '#2563eb', '#1d4ed8'];
+            
+            // 绘制工作卡片连线
+            const workCards = container.querySelectorAll('.timeline-work-track .timeline-event-card');
+            const workBars = container.querySelectorAll('.timeline-segment.work');
+            
+            workCards.forEach((card, index) => {
+                if (workBars[index]) {
+                    const cardRect = card.getBoundingClientRect();
+                    const barRect = workBars[index].getBoundingClientRect();
+                    
+                    // bar底部中心
+                    const x1 = barRect.left + barRect.width / 2 - containerRect.left;
+                    const y1 = barRect.bottom - containerRect.top;
+                    
+                    // 卡片顶部中心
+                    const x2 = cardRect.left + cardRect.width / 2 - containerRect.left;
+                    const y2 = cardRect.top - containerRect.top;
+                    
+                    // 绘制二次贝塞尔曲线
+                    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                    const controlY = (y1 + y2) / 2;
+                    const d = `M ${x1} ${y1} Q ${x1} ${controlY}, ${x2} ${y2}`;
+                    path.setAttribute('d', d);
+                    path.setAttribute('stroke', workColors[index] || '#3b82f6');
+                    path.setAttribute('class', 'timeline-connection-path');
+                    svg.appendChild(path);
+                }
+            });
+        }
+        
+        // 初始化连线
+        drawTimelineConnections();
+        
+        // 窗口调整时重新绘制连线
+        window.addEventListener('resize', drawTimelineConnections);
+        
+        // 页面加载完成后重新绘制（确保所有元素已渲染）
+        window.addEventListener('load', () => {
+            setTimeout(drawTimelineConnections, 100);
+        });
+    </script>
+</body>
+</html>
