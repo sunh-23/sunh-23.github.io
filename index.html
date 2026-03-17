@@ -329,19 +329,32 @@
         
         .research-tag {
             display: inline-block;
-            padding: 0.25rem 0.6rem;
+            padding: 0.28rem 0.68rem;
             border-radius: 4px;
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             font-weight: 600;
             background: #eff6ff;
             color: var(--primary-blue);
-            margin: 0.15rem;
+            margin: 0.08rem;
             transition: all 0.2s ease;
         }
         
         .research-tag:hover {
             background: var(--primary-blue);
             color: white;
+        }
+
+        .research-tag-break {
+            flex-basis: 100%;
+            height: 0;
+        }
+
+        .research-subtitle {
+            margin-top: -0.2rem;
+            margin-bottom: 0.35rem;
+            font-size: 0.66rem;
+            line-height: 1.25;
+            color: var(--text-secondary);
         }
         
         .company-card {
@@ -384,7 +397,7 @@
         .research-column {
             background: white;
             border-radius: 8px;
-            padding: 1.25rem;
+            padding: 0.82rem 1rem 0.78rem;
             height: 100%;
             transition: all 0.2s ease;
             border-top: 3px solid var(--primary-blue);
@@ -394,6 +407,23 @@
         
         .research-column:hover {
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .research-column h3 {
+            font-size: 0.94rem;
+            line-height: 1.2;
+            white-space: nowrap;
+        }
+
+        .research-grid {
+            display: grid;
+            gap: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .research-grid {
+                grid-template-columns: 0.95fr 1.1fr 0.95fr;
+            }
         }
         
         .time-tag {
@@ -412,11 +442,17 @@
         .highlight-card {
             background: var(--bg-light);
             border-radius: 8px;
-            padding: 0.9rem;
+            padding: 0.72rem 0.9rem 0.62rem;
             border-left: 3px solid var(--primary-blue);
             border: 1px solid var(--border-light);
             transition: all 0.2s ease;
             position: relative;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto;
+            grid-template-rows: auto auto;
+            column-gap: 0.5rem;
+            row-gap: 0.18rem;
+            align-items: start;
         }
         
         .highlight-card:hover {
@@ -424,10 +460,38 @@
         }
         
         .highlight-number {
-            font-size: 1.4rem;
+            font-size: 1.58rem;
             font-weight: 700;
             color: var(--primary-blue);
             display: block;
+            grid-column: 1;
+            grid-row: 1;
+            min-width: 0;
+            white-space: nowrap;
+            line-height: 1;
+            align-self: start;
+        }
+
+        .highlight-card p {
+            margin: 0;
+            line-height: 1.15;
+            white-space: nowrap;
+        }
+
+        .highlight-card p.font-semibold {
+            grid-column: 1;
+            grid-row: 2;
+            min-width: 0;
+            color: var(--primary-blue);
+            opacity: 0.64;
+        }
+
+        .highlight-card p.text-xs:not(.font-semibold) {
+            grid-column: 2;
+            grid-row: 2;
+            justify-self: end;
+            text-align: right;
+            min-width: 0;
         }
         
         /* 缩小highlight卡片的标题和描述文字 */
@@ -440,9 +504,7 @@
         }
         
         .edu-card {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
+            display: block;
             padding: 1rem;
             background: white;
             border-radius: 8px;
@@ -455,6 +517,19 @@
         
         .edu-card:hover {
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .edu-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .edu-card-title {
+            min-width: 0;
+            flex: 1;
         }
         
         .award-item {
@@ -491,12 +566,40 @@
             border: 1px solid var(--border-light);
         }
 
+        .section-overview {
+            background: transparent;
+            border-radius: 8px;
+            padding: 0.78rem 0 0.82rem 1rem;
+            border: none;
+            border-left: 4px solid var(--primary-blue);
+            border-bottom: 1px solid #d7dee8;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-overview p {
+            margin: 0;
+        }
+
+        .overview-highlight {
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        .subtle-emphasis {
+            font-weight: 600;
+            color: #475569;
+        }
+
         .card-icon {
-            position: absolute;
-            top: 0.5rem;
-            right: 0.5rem;
-            font-size: 0.9rem;
+            position: static;
+            grid-column: 2;
+            grid-row: 1;
+            justify-self: end;
+            align-self: start;
+            font-size: 1rem;
             opacity: 0.7;
+            line-height: 1;
+            margin-top: 0.08rem;
         }
 
         .inline-icon {
@@ -1063,11 +1166,11 @@
             
             /* 手机端优化highlight卡片 */
             .highlight-card {
-                padding: 0.6rem;
+                padding: 0.52rem 0.65rem 0.48rem;
             }
             
             .highlight-number {
-                font-size: 1.1rem;
+                font-size: 1.25rem;
             }
             
             .highlight-card p.text-xs {
@@ -1266,15 +1369,15 @@
             </h2>
             <div class="section-divider"></div>
             <p class="text-sm text-gray-600 leading-relaxed">
-                I am a Ph.D. student at
-                <a href="http://ai.nju.edu.cn/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline inline-flex items-center gap-1">
+                I am currently a Ph.D. student at the
+                <a href="https://ai.nju.edu.cn/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline inline-flex items-center gap-1">
                     School of Artificial Intelligence
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="external-link-icon">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-4.5 0L18 3m0 0h-5.25M18 3v5.25" />
                     </svg>
                 </a>
                 in
-                <a href="http://www.nju.edu.cn/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline inline-flex items-center gap-1">
+                <a href="https://www.nju.edu.cn/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline inline-flex items-center gap-1">
                     Nanjing University
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="external-link-icon">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-4.5 0L18 3m0 0h-5.25M18 3v5.25" />
@@ -1287,9 +1390,15 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-4.5 0L18 3m0 0h-5.25M18 3v5.25" />
                     </svg>
                 </a>,
-                led by
-                <a href="http://cs.nju.edu.cn/zhouzh/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline inline-flex items-center gap-1">
-                    Prof. Zhi-Hua Zhou
+                which is led by
+                <a href="https://cs.nju.edu.cn/zhouzh/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline inline-flex items-center gap-1">
+                    Prof. Zhi-Hua Zhou (周志华)
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="external-link-icon">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-4.5 0L18 3m0 0h-5.25M18 3v5.25" />
+                    </svg>
+                </a>, and I am supervised by
+                <a href="https://ai.nju.edu.cn/lim/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline inline-flex items-center gap-1">
+                    Prof. Ming Li (黎铭)
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="external-link-icon">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-4.5 0L18 3m0 0h-5.25M18 3v5.25" />
                     </svg>
@@ -1298,27 +1407,34 @@
 
             <p class="text-sm text-gray-600 leading-relaxed mt-2">
                 I received my B.Sc. from
-                <a href="https://csw.jlu.edu.cn/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline inline-flex items-center gap-1">
-                    Software College
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="external-link-icon">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-4.5 0L18 3m0 0h-5.25M18 3v5.25" />
-                    </svg>
-                </a>
-                at
                 <a href="https://www.jlu.edu.cn/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline inline-flex items-center gap-1">
                     Jilin University
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="external-link-icon">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-4.5 0L18 3m0 0h-5.25M18 3v5.25" />
                     </svg>
                 </a>
-                in 2019. I then joined Nanjing University as a M.Sc. student (direct admission) and graduated in 2022. From 2022 to 2023, I worked as an algorithm engineer at
-                <a href="https://shopee.cn/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline inline-flex items-center gap-1">
-                    Shopee
+                in 2019, and my M.Sc. from
+                <a href="https://www.nju.edu.cn/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline inline-flex items-center gap-1">
+                    Nanjing University
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="external-link-icon">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-4.5 0L18 3m0 0h-5.25M18 3v5.25" />
                     </svg>
-                </a>.
-                In 2023, I returned to LAMDA to pursue a full-time Ph.D.
+                </a>
+                in 2022. Before starting my Ph.D., I worked as a full-time algorithm engineer at
+                <a href="#experience_shopee" class="text-blue-600 hover:underline">
+                    Shopee
+                </a>
+                for over one year, and then returned to Nanjing University for full-time Ph.D. study.
+            </p>
+
+            <p class="text-sm text-gray-600 leading-relaxed mt-2">
+                My research interests include large language models (LLMs), machine learning, and information retrieval,  with related industry experience at
+                <a href="#experience_shopee" class="text-blue-600 hover:underline">
+                    Shopee
+                </a>,
+                <a href="#experience_tiktok" class="text-blue-600 hover:underline">ByteDance</a>,
+                and
+                <a href="#experience_AIDC" class="text-blue-600 hover:underline">Alibaba</a>.
             </p>
             
             <!-- Timeline -->
@@ -1477,14 +1593,16 @@
                 Research Interests
             </h2>
             <div class="section-divider"></div>
-            <p class="text-sm mb-4" style="color: var(--text-secondary);">I am interested in machine learning and data mining, especially the following:</p>
+            <p class="text-sm mb-4" style="color: var(--text-secondary);">My recent research focuses on the following areas:</p>
             
-            <div class="grid md:grid-cols-3 gap-4">
+            <div class="research-grid">
                 <div class="research-column">
-                    <h3 class="font-bold text-sm mb-3" style="color: var(--primary-blue);">Transfer Learning & Semi-supervised Learning</h3>
+                    <h3 class="font-bold mb-1" style="color: var(--primary-blue); font-size: 1.06rem; line-height: 1.2; white-space: nowrap;">Machine Learning</h3>
+                    <p class="research-subtitle">with a focus on Transfer Learning</p>
                     <div class="flex flex-wrap gap-1">
                         <a href="#pub-j1" class="research-tag">[J1]</a>
-                        <a href="#pub-j3" class="research-tag">[J3]</a>
+                        <a href="#pub-j4" class="research-tag">[J4]</a>
+                        <a href="#pub-c7" class="research-tag">[C7]</a>
                         <a href="#pub-c8" class="research-tag">[C8]</a>
                         <a href="#pub-c9" class="research-tag">[C9]</a>
                         <!-- <a href="#pub-pt1" class="research-tag">[PT1]</a> -->
@@ -1492,35 +1610,37 @@
                 </div>
                 
                 <div class="research-column">
-                    <h3 class="font-bold text-sm mb-1" style="color: var(--primary-blue);">Multimodal & Code LLMs</h3>
+                    <h3 class="font-bold mb-1" style="color: var(--primary-blue); font-size: 1.06rem; line-height: 1.2; white-space: nowrap;">Multimodal & Code LLMs</h3>
                     <div class="flex flex-wrap gap-1">
+                        <a href="#pub-j2" class="research-tag">[J2]</a>
                         <a href="#pub-p1" class="research-tag">[P1]</a>
                         <a href="#pub-p2" class="research-tag">[P2]</a>
                         <a href="#pub-p3" class="research-tag">[P3]</a>
                         <a href="#pub-p4" class="research-tag">[P4]</a>
                         <a href="#pub-p5" class="research-tag">[P5]</a>
                         <a href="#pub-p6" class="research-tag">[P6]</a>
-                        <a href="#pub-j2" class="research-tag">[J2]</a>
                         <a href="#pub-c2" class="research-tag">[C2]</a>
                         <a href="#pub-c3" class="research-tag">[C3]</a>
                         <a href="#pub-c4" class="research-tag">[C4]</a>
                         <a href="#pub-c5" class="research-tag">[C5]</a>
                         <a href="#pub-c6" class="research-tag">[C6]</a>
-                        <a href="#experience_AIDC" class="research-tag" style="background: rgba(255, 106, 0, 0.15); color: #FF6A00; font-size: 0.65rem;">Intern@Ali AIDC</a>
-                        <a href="#experience_AIDC" class="research-tag" style="background: rgba(255, 106, 0, 0.15); color: #FF6A00; font-size: 0.65rem;">Intern@Alibaba Cloud</a>
+                        <span class="research-tag-break" aria-hidden="true"></span>
+                        <a href="#experience_AIDC" class="research-tag" style="background: rgba(255, 106, 0, 0.15); color: #FF6A00; font-size: 0.74rem; padding: 0.28rem 0.62rem; margin: 0.08rem;">Intern@Ali AIDC</a>
+                        <a href="#experience_AIDC" class="research-tag" style="background: rgba(22, 119, 255, 0.14); color: #1677FF; font-size: 0.74rem; padding: 0.28rem 0.62rem; margin: 0.08rem;">Intern@Ali Cloud</a>
                     </div>
                 </div>
                 
                 <div class="research-column">
-                    <h3 class="font-bold text-sm mb-3" style="color: var(--primary-blue);">Search & Recomendation System</h3>
+                    <h3 class="font-bold mb-1" style="color: var(--primary-blue); font-size: 1.06rem; line-height: 1.2; white-space: nowrap;">Search & Recommender</h3>
                     <div class="flex flex-wrap gap-1">
                         <a href="#pub-c1" class="research-tag">[C1]</a>
-                        <a href="#pub-j2" class="research-tag">[J2]</a>
+                        <a href="#pub-j3" class="research-tag">[J3]</a>
                         <a href="#pub-c10" class="research-tag">[C10]</a>
-                        <a href="#experience_shopee" class="research-tag" style="background: rgba(238, 77, 45, 0.15); color: #EE4D2D; font-size: 0.65rem;">Work@Shopee</a>
-                        <a href="#experience_tiktok" class="research-tag" style="background: rgba(0, 132, 255, 0.15); color: #0084FF; font-size: 0.65rem;">Intern@TikTok</a>
-                        <a href="#experience_AE" class="research-tag" style="background: rgba(255, 106, 0, 0.15); color: #FF6A00; font-size: 0.65rem;">Intern@AliExpress</a>
-                        <a href="#experience_bytedance" class="research-tag" style="background: rgba(0, 132, 255, 0.15); color: #0084FF; font-size: 0.65rem;">Intern@ByteDance</a>
+                        <span class="research-tag-break" aria-hidden="true"></span>
+                        <a href="#experience_shopee" class="research-tag" style="background: rgba(238, 77, 45, 0.15); color: #EE4D2D; font-size: 0.74rem; padding: 0.28rem 0.62rem; margin: 0.08rem;">Work@Shopee</a>
+                        <a href="#experience_AE" class="research-tag" style="background: rgba(255, 106, 0, 0.15); color: #FF6A00; font-size: 0.74rem; padding: 0.28rem 0.62rem; margin: 0.08rem;">Intern@AliExpress</a>
+                        <a href="#experience_tiktok" class="research-tag" style="background: rgba(0, 132, 255, 0.15); color: #0084FF; font-size: 0.74rem; padding: 0.28rem 0.62rem; margin: 0.08rem;">Intern@TikTok</a>
+                        <a href="#experience_bytedance" class="research-tag" style="background: rgba(0, 132, 255, 0.15); color: #0084FF; font-size: 0.74rem; padding: 0.28rem 0.62rem; margin: 0.08rem;">Intern@ByteDance</a>
                     </div>
                 </div>
             </div>
@@ -1550,7 +1670,7 @@
                             <p class="text-xs mb-1" style="color: var(--text-secondary);">
                                 Yali Du†, <span class="author-highlight">Hui Sun† (Equal Contribution)</span>, and Ming Li
                             </p>
-                            <p class="text-xs italic" style="color: var(--text-secondary);">Under review for the Journal First track of a CCF-A conference</p>
+                            <p class="text-xs italic" style="color: var(--text-secondary);">2026. Under Review at FSE <span class="subtle-emphasis">Journal First Track</span></p>
                         </div>
                     </div>
 
@@ -1619,7 +1739,7 @@
                             <div class="pub-number">P6</div>
                         </div>
                         <div class="flex flex-wrap items-start gap-1">
-                            <span class="badge badge-preprint">Preprint</span>
+                            <span class="badge badge-preprint">Tech Report</span>
                             <!-- <span class="badge badge-gold">Tech Report</span> -->
                             <!-- <span class="badge badge-gold">CCF-A</span> -->
                         </div>
@@ -1628,7 +1748,7 @@
                             <p class="text-xs mb-1" style="color: var(--text-secondary);">
                                 Ovis Team (Contributor: <span class="author-highlight">Hui Sun</span>), Alibaba Group
                             </p>
-                            <p class="text-xs italic" style="color: var(--text-secondary);">Technical Report, arXiv: 2508.11737</p>
+                            <p class="text-xs italic" style="color: var(--text-secondary);">2025. Technical Report, arXiv: 2508.11737</p>
                         </div>
                     </div>
                 </div>
@@ -1724,7 +1844,7 @@
                         <div class="flex-1">
                             <h4 class="font-bold text-sm mb-1" style="color: var(--primary-blue);">OneTrans: Unified Feature Interaction and Sequence Modeling with One Transformer in Industrial Recommender</h4>
                             <p class="text-xs mb-1" style="color: var(--text-secondary);">
-                                Zhaoqi Zhang, Haolei Pei, Jun Guo, Tianyu Wang, Yufei Feng, <span class="author-highlight">Hui Sun</span>, Shaowei Liu, Aixin Sun
+                                Zhaoqi Zhang, Haplei Pei, Jun Guo, Tianyu Wang, Yufei Feng, <span class="author-highlight">Hui Sun</span>, Shaowei Liu, Aixin Sun
                             </p>
                             <p class="text-xs italic" style="color: var(--text-secondary);">The ACM Web Conference, 2026</p>
                         </div>
@@ -1756,7 +1876,7 @@
                             <span class="badge badge-gold">CCF-A</span>
                         </div>
                         <div class="flex-1">
-                            <h4 class="font-bold text-sm mb-1" style="color: var(--primary-blue);">ARBench: Algorithmic Reasoner or API Alchemist? Evaluating Code-Generating LLMs beyond API Calls</h4>
+                            <h4 class="font-bold text-sm mb-1" style="color: var(--primary-blue);">ARBench: Algorithmic Reasoner or API Alchemist? Evaluating Code-Generating LLMs beyond API Calls.</h4>
                             <p class="text-xs" style="color: var(--text-secondary);">
                                 Ren-Biao Liu, Chao-Zeng Ma, An-Qi Li, <span class="author-highlight">Hui Sun</span>, Xin-Ye Li, and Ming Li
                             </p>
@@ -1931,14 +2051,14 @@
             <div class="section-divider"></div>
             
             <div class="grid md:grid-cols-2 gap-3">
-                 <div class="award-item">
+                <div class="award-item">
                     <div class="award-icon" style="color: #f59e0b;">
                         <i class="fas fa-star"></i>
                     </div>
                     <div class="flex-1">
                         <p class="text-sm font-bold mb-1" style="color: var(--primary-blue);">ByteDance Soaring Star Talent Program</p>
                         <p class="text-xs mb-1" style="font-weight: 600;">筋斗云人才计划</p>
-                        <p class="text-xs" style="color: var(--text-secondary);">ByteDance · Apr 2025</p>
+                        <p class="text-xs" style="color: var(--text-secondary);">ByteDance · 2025</p>
                     </div>
                 </div>
 
@@ -1959,8 +2079,8 @@
                     </div>
                     <div class="flex-1">
                         <p class="text-sm font-bold mb-1" style="color: var(--primary-blue);">Artificial Intelligence Scholarship</p>
-                        <p class="text-xs mb-1" style="font-weight: 600;">50 recipients university-wide per year</p>
-                        <p class="text-xs" style="color: var(--text-secondary);">Nanjing University · Oct 2019</p>
+                        <p class="text-xs mb-1" style="font-weight: 600;">50 recipients across 9 AI-related schools</p>
+                        <p class="text-xs" style="color: var(--text-secondary);">Nanjing University · 2019</p>
                     </div>
                 </div>
                 
@@ -2002,8 +2122,8 @@
                         <i class="fas fa-trophy"></i>
                     </div>
                     <div class="flex-1">
-                        <p class="text-sm font-bold mb-1" style="color: var(--primary-blue);">Jilin Province Collegiate Programming Contest</p>
-                        <p class="text-xs mb-1" style="color: #f59e0b; font-weight: 600;">Gold Medal</p>
+                        <p class="text-sm font-bold mb-1" style="color: var(--primary-blue);">Northeast Collegiate Programming Contest</p>
+                        <p class="text-xs mb-1" style="color: #f59e0b; font-weight: 600;">First Prize</p>
                         <p class="text-xs" style="color: var(--text-secondary);">Changchun · May 2017</p>
                     </div>
                 </div>
@@ -2013,9 +2133,9 @@
                         <i class="fas fa-trophy"></i>
                     </div>
                     <div class="flex-1">
-                        <p class="text-sm font-bold mb-1" style="color: var(--primary-blue);">Northeast Collegiate Programming Contest</p>
-                        <p class="text-xs mb-1" style="color: #f59e0b; font-weight: 600;">Gold Medal</p>
-                        <p class="text-xs" style="color: var(--text-secondary);">Changchun · Sep 2016</p>
+                        <p class="text-sm font-bold mb-1" style="color: var(--primary-blue);">Jilin Province Collegiate Programming Contest</p>
+                        <p class="text-xs mb-1" style="color: #f59e0b; font-weight: 600;">First Prize</p>
+                        <p class="text-xs" style="color: var(--text-secondary);">Jilin Province · 2017</p>
                     </div>
                 </div>
             </div>
@@ -2028,6 +2148,12 @@
                 Work Experience
             </h2>
             <div class="section-divider"></div>
+
+            <div class="section-overview">
+                <p class="text-sm" style="color: var(--text-secondary);">
+                    I have <span class="overview-highlight">4.5+ years</span> of industry experience in algorithm R&amp;D across recommendation systems and multimodal foundation models, with work at ByteDance, Alibaba, and Shopee. My experience focuses on building and iterating production systems for ranking, retrieval, and large-scale model applications, with an emphasis on measurable online impact.
+                </p>
+            </div>
             
             <div class="space-y-4">
                 <!-- ByteDance TikTok E-commerce -->
@@ -2039,7 +2165,7 @@
                                     <i class="fas fa-building"></i>
                                     ByteDance - TikTok Shop Rec.
                                 </h3>
-                                <p class="text-sm" style="color: var(--text-secondary);"><strong>Rec. Algorithm Intern</strong> | LLM for E-commerce Rec. - Soaring Star Talent Program (筋斗云人才计划)</p>
+                                <p class="text-sm" style="color: var(--text-secondary);"><strong>Recommendation LLM Algorithm Intern</strong> | Soaring Star Talent Program (筋斗云人才计划)</p>
                             </div>
                         </div>
                         <span class="time-tag">
@@ -2049,12 +2175,12 @@
                     </div>
                     
                     <p class="text-sm mb-3" style="color: var(--text-secondary);">
-                        Responsible for optimizing large-scale recommendation models for fine-ranking and retrieval in TikTok Shop, integrating cutting-edge Large Language Models (LLM) and generative technologies to improve recommendation quality and business metrics across multiple scenarios.
+                        Focused on scaling up TikTok Shop recommendation models for both fine-ranking and retrieval. Core work included unifying the fine-ranking architecture with a decoder-only transformer and independently designing and deploying a generative recall solution that delivered clear offline and online gains.
                     </p>
                     
                     <!-- Point 1: Fine-Ranking -->
                     <div class="text-sm mb-2" style="color: var(--text-secondary);">
-                        <strong style="color: var(--primary-blue);">Fine-Ranking Architecture Upgrade (One Transformer):</strong> Core contributor to the scaling up of the fine-ranking model, unifying the complex architecture into a decoder-only transformer. The deployed model achieved significant GMV/u growth across core scenarios.
+                        <strong style="color: var(--primary-blue);">Fine-Ranking - OneTrans Unified Modeling:</strong> Core contributor to the design and deployment of OneTrans, which replaced traditional feature crossing and sequence modules with a unified decoder-only transformer for TikTok Shop fine-ranking, bringing significant online gains across multiple core scenarios.
                     </div>
                     
                     <div class="grid grid-cols-2 md:grid-cols-5 gap-3 mb-4">
@@ -2092,7 +2218,7 @@
 
                     <!-- Point 2: Generative Retrieval -->
                     <div class="text-sm mb-2" style="color: var(--text-secondary);">
-                        <strong style="color: var(--primary-blue);">Generative Recall:</strong> As the PIC, designed and deployed a novel generative recall algorithm. Achieved significant improvements in offline HitRate, as well as online CVR, CTCVR, and GPM in A/B testing.
+                        <strong style="color: var(--primary-blue);">Recall - Generative Retrieval:</strong> Served as PIC to design, implement, and launch a generative recall solution from end to end, with substantial improvements in offline HitRate and strong online A/B gains in CVR, CTCVR, and GPM.
                     </div>
                     
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-1">
@@ -2121,6 +2247,10 @@
                             <p class="text-xs" style="color: var(--text-secondary);">A/B Testing</p>
                         </div>
                     </div>
+
+                    <div class="text-sm mt-3" style="color: var(--text-secondary);">
+                        <strong style="color: var(--primary-blue);">Academic Impact:</strong> The OneTrans work was published at WWW 2026 and received broad recognition from industry peers including Meta.
+                    </div>
                 </div>
 
                 <!-- Alibaba AIDC -->
@@ -2132,7 +2262,7 @@
                                     <i class="fas fa-building"></i>
                                     Alibaba AIDC - Ovis Team
                                 </h3>
-                                <p class="text-sm" style="color: var(--text-secondary);"><strong>LLM Researcher</strong> | Multimodal LLM Research</p>
+                                <p class="text-sm" style="color: var(--text-secondary);"><strong>Multimodal LLM Research Intern</strong> | Ovis Team</p>
                             </div>
                         </div>
                         <span class="time-tag">
@@ -2142,19 +2272,19 @@
                     </div>
                     
                     <p class="text-sm mb-3" style="color: var(--text-secondary);">
-                        As a key developer, I contributed to Ovis V1.6, V2.0, and V2.5. Primarily responsible for developing video understanding capabilities from scratch (including data preparation, algorithm design, and model training), contributing to the SFT for the Ovis GUI Agent with a focus on optimizing GUI & general grounding, and collecting trajectory data for the agent's web-based operations.
+                        Early core contributor to the Ovis series, deeply involved in the iteration from V1.6 to V2.5. Led the build-out of multi-image and video understanding capabilities from 0 to 1, proposed the MDP3 method for stronger multi-image and long-video understanding, and contributed to GUI Agent SFT and web trajectory data automation.
                     </p>
                     
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-3">
                         <div class="highlight-card">
                             <i class="fas fa-ranking-star card-icon" style="color: var(--primary-blue);"></i>
-                            <span class="highlight-number">#1</span>
+                            <span class="highlight-number">Top #1</span>
                             <p class="text-xs font-semibold" style="color: var(--primary-blue);">Ovis 2.5</p>
-                            <p class="text-xs" style="color: var(--text-secondary);">&lt;40B params</p>
+                            <p class="text-xs" style="color: var(--text-secondary);">&lt;40B</p>
                         </div>
                         <div class="highlight-card">
                             <i class="fas fa-ranking-star card-icon" style="color: var(--primary-blue);"></i>
-                            <span class="highlight-number">#2</span>
+                            <span class="highlight-number">Top #2</span>
                             <p class="text-xs font-semibold" style="color: var(--primary-blue);">Ovis 2.0</p>
                             <p class="text-xs" style="color: var(--text-secondary);">OpenCompass</p>
                         </div>
@@ -2170,6 +2300,10 @@
                             <p class="text-xs font-semibold" style="color: var(--primary-blue);">Ovis2.5</p>
                             <p class="text-xs" style="color: var(--text-secondary);">Contributor</p>
                         </div>
+                    </div>
+
+                    <div class="text-sm mb-3" style="color: var(--text-secondary);">
+                        <strong style="color: var(--primary-blue);">Open-Source and Community Impact:</strong> The Ovis series was open-sourced on Hugging Face, surpassing 210k downloads, 1.2k+ likes, and 1.4k+ GitHub stars. At release, Ovis 2.5 ranked first on the OpenCompass open-source leaderboard for models under 40B, while Ovis 2.0 ranked second globally and was repeatedly covered by Hugging Face and QbitAI.
                     </div>
                     
                     <div class="achievement-box">
@@ -2187,6 +2321,10 @@
                             <p class="text-xs" style="color: var(--text-secondary);">• <a href="https://huggingface.co/collections/AIDC-AI/ovis15-66a7a9848a3a0a84df1ccc25" class="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">Ovis 1.5 on HuggingFace</a></p>
                         </div>
                     </div>
+
+                    <div class="text-sm mt-3" style="color: var(--text-secondary);">
+                        <strong style="color: var(--primary-blue);">Academic Impact:</strong> Related work was published at ICCV 2025 as first author, and I also contributed to the Ovis 2.5 technical report.
+                    </div>
                 </div>
 
                 <!-- Shopee -->
@@ -2198,7 +2336,7 @@
                                     <i class="fas fa-building"></i>
                                     Shopee (Sea Limited)
                                 </h3>
-                                <p class="text-sm" style="color: var(--text-secondary);"><strong>Algorithm Engineer (Full-time)</strong> | Ranking for E-commerce Search</p>
+                                <p class="text-sm" style="color: var(--text-secondary);"><strong>Core Search Algorithm Engineer (Full-time)</strong> | E-commerce Search Ranking</p>
                             </div>
                         </div>
                         <span class="time-tag">
@@ -2208,81 +2346,78 @@
                     </div>
 
                     <p class="text-sm mb-3" style="color: var(--text-secondary);">
-                        Primarily responsible for maintaining and optimizing the foundational E-commerce search ranking model, initially used in fine-ranking and extended to recall, coarse-ranking, and long-tail scenarios. Key work includes:
+                        Led the refactoring of Shopee's core search fine-ranking training and serving framework, maintained online models across all sites, and helped extend the refactored design to recall, coarse-ranking, and long-tail teams through modular configuration, pretrained parameter reuse, and user-side computation reuse.
                     </p>
                    
                     <div class="text-sm mb-2" style="color: var(--text-secondary);">
-                        <strong style="color: var(--primary-blue);">Algorithm Improvements:</strong> 
+                        <strong style="color: var(--primary-blue);">Architecture - Fine-Ranking System Refactor:</strong> Rebuilt the production framework to improve convergence efficiency, offline training speed, and online inference latency, while making the solution reusable across multiple ranking stages.
                     </div>
                     
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-3">
                         <div class="highlight-card">
-                            <i class="fas fa-chart-line card-icon" style="color: var(--primary-blue);"></i>
-                            <span class="highlight-number">+0.6%</span>
-                            <p class="text-xs font-semibold" style="color: var(--primary-blue);">CEL - CTR AUC</p>
-                            <p class="text-xs" style="color: var(--text-secondary);">Embedding Learning</p>
-                        </div>
-                        <div class="highlight-card">
-                            <i class="fas fa-chart-line card-icon" style="color: var(--primary-blue);"></i>
-                            <span class="highlight-number">+0.5%</span>
-                            <p class="text-xs font-semibold" style="color: var(--primary-blue);">PLE - CTR AUC</p>
-                            <p class="text-xs" style="color: var(--text-secondary);">Multi-task</p>
-                        </div>
-                        <div class="highlight-card">
-                            <i class="fas fa-chart-line card-icon" style="color: var(--primary-blue);"></i>
-                            <span class="highlight-number">+0.2%</span>
-                            <p class="text-xs font-semibold" style="color: var(--primary-blue);">AutoDis - CTR</p>
-                            <p class="text-xs" style="color: var(--text-secondary);">Numeric feature</p>
-                        </div>
-                        <div class="highlight-card">
-                            <i class="fas fa-chart-line card-icon" style="color: var(--primary-blue);"></i>
-                            <span class="highlight-number">+0.3%</span>
-                            <p class="text-xs font-semibold" style="color: var(--primary-blue);">AutoDis - CVR</p>
-                            <p class="text-xs" style="color: var(--text-secondary);">Numeric feature</p>
-                        </div>
-                    </div>
-
-                    <div class="text-sm mb-2" style="color: var(--text-secondary);">
-                        <strong style="color: var(--primary-blue);">Model Infastruceture Maintenance:</strong> deconstructing neural networks into configurable blocks for faster convergence and sharing user-side computations to improve speed.
-                    </div>
-                    
-                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 mb-3">
-                        <div class="highlight-card">
                             <i class="fas fa-clock card-icon" style="color: var(--primary-blue);"></i>
                             <span class="highlight-number">2m &rarr; 1wk</span>
-                            <p class="text-xs font-semibold" style="color: var(--primary-blue);">Data to Convergence</p>
+                            <p class="text-xs font-semibold" style="color: var(--primary-blue);">Convergence Data</p>
                             <p class="text-xs" style="color: var(--text-secondary);">Module-wise Reuse</p>
                         </div>
                         <div class="highlight-card">
-                            <i class="fas fa-rocket card-icon" style="color: var(--primary-blue);"></i>
+                            <i class="fas fa-bolt card-icon" style="color: var(--primary-blue);"></i>
                             <span class="highlight-number">+105%</span>
-                            <p class="text-xs font-semibold" style="color: var(--primary-blue);">Training Speed</p>
+                            <p class="text-xs font-semibold" style="color: var(--primary-blue);">Offline Training</p>
                             <p class="text-xs" style="color: var(--text-secondary);">37&rarr;76 samples/(c&middot;s)</p>
                         </div>
                         <div class="highlight-card">
                             <i class="fas fa-bolt card-icon" style="color: var(--primary-blue);"></i>
                             <span class="highlight-number">+232%</span>
-                            <p class="text-xs font-semibold" style="color: var(--primary-blue);">Inference Speed</p>
+                            <p class="text-xs font-semibold" style="color: var(--primary-blue);">Online Inference</p>
                             <p class="text-xs" style="color: var(--text-secondary);">95.5ms&rarr;28.8ms</p>
                         </div>
                         <div class="highlight-card">
                             <i class="fas fa-tachometer-alt card-icon" style="color: var(--primary-blue);"></i>
                             <span class="highlight-number">10x</span>
-                            <p class="text-xs font-semibold" style="color: var(--primary-blue);">CEL Speed</p>
-                            <p class="text-xs" style="color: var(--text-secondary);">Real-world impl.</p>
+                            <p class="text-xs font-semibold" style="color: var(--primary-blue);">CEL Runtime</p>
+                            <p class="text-xs" style="color: var(--text-secondary);">Real-world Deployment</p>
+                        </div>
+                    </div>
+
+                    <div class="text-sm mb-2" style="color: var(--text-secondary);">
+                        <strong style="color: var(--primary-blue);">Algorithm - Multi-task and Long-tail Optimization:</strong> Introduced PLE for CTR/CVR multi-task learning, AutoDis for discretizing numerical features, and CEL for better long-tail representation learning.
+                    </div>
+                    
+                    <div class="grid grid-cols-2 md:grid-cols-5 gap-3 mb-3">
+                        <div class="highlight-card">
+                            <i class="fas fa-chart-line card-icon" style="color: var(--primary-blue);"></i>
+                            <span class="highlight-number">+0.5%</span>
+                            <p class="text-xs font-semibold" style="color: var(--primary-blue);">PLE</p>
+                            <p class="text-xs" style="color: var(--text-secondary);">CTR AUC</p>
+                        </div>
+                        <div class="highlight-card">
+                            <span class="highlight-number">+0.2/+0.3%</span>
+                            <p class="text-xs font-semibold" style="color: var(--primary-blue);">AutoDis</p>
+                            <p class="text-xs" style="color: var(--text-secondary);">CTR/CVR AUC</p>
+                        </div>
+                        <div class="highlight-card">
+                            <i class="fas fa-chart-line card-icon" style="color: var(--primary-blue);"></i>
+                            <span class="highlight-number">+0.6%</span>
+                            <p class="text-xs font-semibold" style="color: var(--primary-blue);">CEL</p>
+                            <p class="text-xs" style="color: var(--text-secondary);">CTR AUC</p>
                         </div>
                         <div class="highlight-card">
                             <i class="fas fa-file-alt card-icon" style="color: var(--primary-blue);"></i>
                             <span class="highlight-number">WWW'23</span>
-                            <p class="text-xs font-semibold" style="color: var(--primary-blue);">Co-author</p>
-                            <p class="text-xs" style="color: var(--text-secondary);">CEL Conference Paper</p>
+                            <p class="text-xs font-semibold" style="color: var(--primary-blue);">CEL [C]</p>
+                            <p class="text-xs" style="color: var(--text-secondary);">Co-author</p>
                         </div>
                         <div class="highlight-card">
                             <i class="fas fa-file-alt card-icon" style="color: var(--primary-blue);"></i>
                             <span class="highlight-number">TORS'24</span>
-                            <p class="text-xs font-semibold" style="color: var(--primary-blue);">Co-author</p>
-                            <p class="text-xs" style="color: var(--text-secondary);">CEL Journal Paper</p>
+                            <p class="text-xs font-semibold" style="color: var(--primary-blue);">CEL [J]</p>
+                            <p class="text-xs" style="color: var(--text-secondary);">Co-author</p>
                         </div>
+                    </div>
+
+                    <div class="text-sm mt-3" style="color: var(--text-secondary);">
+                        <strong style="color: var(--primary-blue);">Academic Impact:</strong> The CEL work was later published at WWW 2023 and ACM TORS 2024.
                     </div>
 
                 </div>
@@ -2296,7 +2431,7 @@
                                     <i class="fas fa-building"></i>
                                     AliExpress (Alibaba Group)
                                 </h3>
-                                <p class="text-sm" style="color: var(--text-secondary);"><strong>Algorithm Engineer</strong> (Intern) | Ranking for E-commerce Recommendation</p>
+                                <p class="text-sm" style="color: var(--text-secondary);"><strong>Recommendation Algorithm Intern</strong> | Fine-Ranking</p>
                             </div>
                         </div>
                         <span class="time-tag">
@@ -2306,34 +2441,33 @@
                     </div>
                     
                     <p class="text-sm mb-3" style="color: var(--text-secondary);">
-                        Designed a country-specific multitask fine-ranking model for multinational e-commerce platform. During the internship, reproduced 14 papers and finally adopted PLE, ESMM, and Gradient Block to optimize the multitask framework. Designed country-level PLE in the top network to capture specific information of the top 5 key countries, and used DCN-v2 in the bottom network to achieve higher-order feature crossover for country-differentiated features.
+                        Worked on multi-objective fine-ranking and country-specific modeling for AliExpress recommendation. Reproduced 14 frontier recommendation papers and completed algorithmic improvements that significantly lifted both CTR and L2P performance in AUC and GAUC.
                     </p>
                     
-                    <div class="grid grid-cols-2 md:grid-cols-5 gap-2">
-                        <div class="highlight-card">
-                            <i class="fas fa-book card-icon" style="color: var(--primary-blue);"></i>
-                            <span class="highlight-number">14</span>
-                            <p class="text-xs font-semibold" style="color: var(--primary-blue);">Reproduced Papers</p>
-                        </div>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
                         <div class="highlight-card">
                             <i class="fas fa-arrow-up card-icon" style="color: var(--primary-blue);"></i>
                             <span class="highlight-number">+0.50%</span>
-                            <p class="text-xs font-semibold" style="color: var(--primary-blue);">CTR AUC</p>
-                        </div>
-                        <div class="highlight-card">
-                            <i class="fas fa-arrow-up card-icon" style="color: var(--primary-blue);"></i>
-                            <span class="highlight-number">+0.78%</span>
-                            <p class="text-xs font-semibold" style="color: var(--primary-blue);">CTR GAUC</p>
+                            <p class="text-xs font-semibold" style="color: var(--primary-blue);">CTR</p>
+                            <p class="text-xs" style="color: var(--text-secondary);">AUC</p>
                         </div>
                         <div class="highlight-card">
                             <i class="fas fa-arrow-up card-icon" style="color: var(--primary-blue);"></i>
                             <span class="highlight-number">+0.53%</span>
-                            <p class="text-xs font-semibold" style="color: var(--primary-blue);">L2P AUC</p>
+                            <p class="text-xs font-semibold" style="color: var(--primary-blue);">L2P</p>
+                            <p class="text-xs" style="color: var(--text-secondary);">AUC</p>
+                        </div>
+                        <div class="highlight-card">
+                            <i class="fas fa-arrow-up card-icon" style="color: var(--primary-blue);"></i>
+                            <span class="highlight-number">+0.78%</span>
+                            <p class="text-xs font-semibold" style="color: var(--primary-blue);">CTR</p>
+                            <p class="text-xs" style="color: var(--text-secondary);">GAUC</p>
                         </div>
                         <div class="highlight-card">
                             <i class="fas fa-arrow-up card-icon" style="color: var(--primary-blue);"></i>
                             <span class="highlight-number">+1.17%</span>
-                            <p class="text-xs font-semibold" style="color: var(--primary-blue);">L2P GAUC</p>
+                            <p class="text-xs font-semibold" style="color: var(--primary-blue);">L2P</p>
+                            <p class="text-xs" style="color: var(--text-secondary);">GAUC</p>
                         </div>
                     </div>
                 </div>
@@ -2347,7 +2481,7 @@
                                     <i class="fas fa-building"></i>
                                     ByteDance
                                 </h3>
-                                <p class="text-sm" style="color: var(--text-secondary);"><strong>Search Algorithm Engineer</strong> (Intern) | Toutiao Series Apps</p>
+                                <p class="text-sm" style="color: var(--text-secondary);"><strong>Search Algorithm Intern</strong> | Vertical Search End-to-End</p>
                             </div>
                         </div>
                         <span class="time-tag">
@@ -2357,27 +2491,27 @@
                     </div>
                     
                     <p class="text-sm mb-3" style="color: var(--text-secondary);">
-                        Mainly responsible for the official user search in ByteDance's "Toutiao" series apps (Toutiao, Xigua Video, DongCheDi, etc.), including the vertical search results under the user search tab, and the user card result under the all web search and video search tab.
+                        Worked on end-to-end engineering and algorithm optimization for account vertical search and general search cards in Toutiao apps. Rewrote the Elasticsearch-based recall pipeline and introduced the first GBDT ranking model for Toutiao account search, leading to clear online metric gains.
                     </p>
                     
                     <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
                         <div class="highlight-card">
                             <i class="fas fa-percentage card-icon" style="color: var(--primary-blue);"></i>
                             <span class="highlight-number">+30%</span>
-                            <p class="text-xs font-semibold" style="color: var(--primary-blue);">CTR of query</p>
-                            <p class="text-xs" style="color: var(--text-secondary);">15%→45%</p>
+                            <p class="text-xs font-semibold" style="color: var(--primary-blue);">Query CTR</p>
+                            <p class="text-xs" style="color: var(--text-secondary);">Vertical Search</p>
                         </div>
                         <div class="highlight-card">
                             <i class="fas fa-search card-icon" style="color: var(--primary-blue);"></i>
                             <span class="highlight-number">+60%</span>
-                            <p class="text-xs font-semibold" style="color: var(--primary-blue);">Card Recall Ratio</p>
-                            <p class="text-xs" style="color: var(--text-secondary);">User cards</p>
+                            <p class="text-xs font-semibold" style="color: var(--primary-blue);">Recall Rate</p>
+                            <p class="text-xs" style="color: var(--text-secondary);">General Search</p>
                         </div>
                         <div class="highlight-card">
                             <i class="fas fa-mouse-pointer card-icon" style="color: var(--primary-blue);"></i>
                             <span class="highlight-number">+5%</span>
                             <p class="text-xs font-semibold" style="color: var(--primary-blue);">Top 3 CTR</p>
-                            <p class="text-xs" style="color: var(--text-secondary);">User cards</p>
+                            <p class="text-xs" style="color: var(--text-secondary);">General Search</p>
                         </div>
                     </div>
                 </div>
@@ -2394,18 +2528,26 @@
             
             <div class="space-y-3">
                 <div class="edu-card">
-                    <div class="flex-1">
-                        <p class="font-bold text-base mb-1">
-                            <a href="http://www.nju.edu.cn/" target="_blank" rel="noopener noreferrer" class="text-blue-800 hover:underline inline-flex items-center gap-1">
-                                Nanjing University (南京大学)
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="external-link-icon">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-4.5 0L18 3m0 0h-5.25M18 3v5.25" />
-                                </svg>
-                            </a>
-                        </p>
+                    <div class="edu-card-header">
+                        <div class="edu-card-title">
+                            <p class="font-bold text-base mb-1">
+                                <a href="http://www.nju.edu.cn/" target="_blank" rel="noopener noreferrer" class="text-blue-800 hover:underline inline-flex items-center gap-1">
+                                    Nanjing University (南京大学)
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="external-link-icon">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-4.5 0L18 3m0 0h-5.25M18 3v5.25" />
+                                    </svg>
+                                </a>
+                            </p>
+                        </div>
+                        <span class="time-tag">
+                            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+                            Sep 2023 - Present (Expected Jun 2027)
+                        </span>
+                    </div>
+                    <div>
                         <p class="text-sm mb-1" style="color: var(--text-secondary);">Ph.D. in Computer Science and Technology, 
                             <a href="http://ai.nju.edu.cn/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline inline-flex items-center gap-1">
-                                Schoolar of Artificial Intelligence
+                                School of Artificial Intelligence
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="external-link-icon">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-4.5 0L18 3m0 0h-5.25M18 3v5.25" />
                                 </svg>
@@ -2427,49 +2569,57 @@
                             </a>
                         </p>
                     </div>
-                    <span class="time-tag">
-                        <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
-                        2023 - Present
-                    </span>
                 </div>
 
                 <div class="edu-card">
-                    <div class="flex-1">
-                        <p class="font-bold text-base mb-1">
-                            <a href="http://www.nju.edu.cn/" target="_blank" rel="noopener noreferrer" class="text-blue-800 hover:underline inline-flex items-center gap-1">
-                                Nanjing University (南京大学)
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="external-link-icon">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-4.5 0L18 3m0 0h-5.25M18 3v5.25" />
-                                </svg>
-                            </a>
-                        </p>
+                    <div class="edu-card-header">
+                        <div class="edu-card-title">
+                            <p class="font-bold text-base mb-1">
+                                <a href="http://www.nju.edu.cn/" target="_blank" rel="noopener noreferrer" class="text-blue-800 hover:underline inline-flex items-center gap-1">
+                                    Nanjing University (南京大学)
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="external-link-icon">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-4.5 0L18 3m0 0h-5.25M18 3v5.25" />
+                                    </svg>
+                                </a>
+                            </p>
+                        </div>
+                        <span class="time-tag">
+                            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+                            Jun 2019 - Jun 2022
+                        </span>
+                    </div>
+                    <div>
                         <p class="text-sm mb-1" style="color: var(--text-secondary);">M.Sc. in Computer Science and Technology, 
                             <a href="http://ai.nju.edu.cn/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline inline-flex items-center gap-1">
-                                Schoolar of Artificial Intelligence
+                                School of Artificial Intelligence
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="external-link-icon">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-4.5 0L18 3m0 0h-5.25M18 3v5.25" />
                                 </svg>
                             </a>
                         </p>
                         <p class="text-sm" style="color: var(--text-secondary);">
-                        Recommended admission (without entrance exam); <strong>Ranked 1st</strong> in coding test during interview.</p>
+                        Recommended admission to the LAMDA Group (without entrance examination); ranked <strong>1st</strong> in the interview coding test.</p>
                     </div>
-                    <span class="time-tag">
-                        <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
-                        2019 - 2022
-                    </span>
                 </div>
 
                 <div class="edu-card">
-                    <div class="flex-1">
-                        <p class="font-bold text-base mb-1">
-                            <a href="https://www.jlu.edu.cn/" target="_blank" rel="noopener noreferrer" class="text-blue-800 hover:underline inline-flex items-center gap-1">
-                                Jilin University (吉林大学)
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="external-link-icon">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-4.5 0L18 3m0 0h-5.25M18 3v5.25" />
-                                </svg>
-                            </a>
-                        </p>
+                    <div class="edu-card-header">
+                        <div class="edu-card-title">
+                            <p class="font-bold text-base mb-1">
+                                <a href="https://www.jlu.edu.cn/" target="_blank" rel="noopener noreferrer" class="text-blue-800 hover:underline inline-flex items-center gap-1">
+                                    Jilin University (吉林大学)
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="external-link-icon">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-4.5 0L18 3m0 0h-5.25M18 3v5.25" />
+                                    </svg>
+                                </a>
+                            </p>
+                        </div>
+                        <span class="time-tag">
+                            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+                            Jun 2015 - Jun 2019
+                        </span>
+                    </div>
+                    <div>
                         <p class="text-sm mb-1" style="color: var(--text-secondary);">B.Sc. in 
                             <a href="https://csw.jlu.edu.cn/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline inline-flex items-center gap-1">
                                 Software Engineering
@@ -2479,12 +2629,8 @@
                             </a>
                              (Excellent Engineer Program)
                         </p>
-                        <p class="text-sm" style="color: var(--text-secondary);">GPA: 3.7/4.0 (Top 5%) · Exchange: ITMO University, Russia (2017)</p>
+                        <p class="text-sm" style="color: var(--text-secondary);">GPA: 3.7/4.0 (Top 5%); ITMO University Exchange (2017)</p>
                     </div>
-                    <span class="time-tag">
-                        <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
-                        2015 - 2019
-                    </span>
                 </div>
             </div>
         </div>
