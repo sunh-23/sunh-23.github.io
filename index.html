@@ -281,6 +281,15 @@
             background: #f3f4f6;
             color: #4b5563;
         }
+
+        .fse-sub-line {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            margin-top: 0.15rem;
+            padding-left: 0.3rem;
+        }
         
         /* 论文标题和作者字体缩小 */
         .publication-item h4 {
@@ -1259,7 +1268,13 @@
             .publication-item p {
                 font-size: 0.75rem;
             }
-            
+
+            .fse-sub-line {
+                padding-left: 0.15rem;
+                margin-top: 0.1rem;
+                gap: 0.2rem;
+            }
+
             /* 手机端教育卡片优化 */
             .edu-card {
                 flex-direction: column;
@@ -1331,7 +1346,7 @@
                 <a href="#awards" aria-label="跳转到获奖荣誉">Awards</a>
                 <a href="#experience" aria-label="跳转到工作经历">Experience</a>
                 <a href="#education" aria-label="跳转到教育经历">Education</a>
-                <a href="#teaching" aria-label="跳转到助教经历">Teaching</a>
+                <!-- <a href="#teaching" aria-label="跳转到助教经历">Teaching</a> -->
             </div>
             <button class="hamburger-menu" id="hamburgerMenu" aria-label="打开菜单">
                 <span></span>
@@ -1357,7 +1372,7 @@
             <a href="#awards" class="mobile-menu-link">Awards</a>
             <a href="#experience" class="mobile-menu-link">Experience</a>
             <a href="#education" class="mobile-menu-link">Education</a>
-            <a href="#teaching" class="mobile-menu-link">Teaching</a>
+            <!-- <a href="#teaching" class="mobile-menu-link">Teaching</a> -->
         </div>
     </div>
 
@@ -1687,13 +1702,12 @@
                 <div class="research-column">
                     <h3 class="font-bold mb-1" style="color: var(--primary-blue); font-size: 1.06rem; line-height: 1.2; white-space: nowrap;">Multimodal & Code LLMs</h3>
                     <div class="flex flex-wrap gap-1">
-                        <a href="#pub-j2" class="research-tag">[J2]</a>
-
                         <a href="#pub-p1" class="research-tag">[P1]</a>
                         <a href="#pub-p2" class="research-tag">[P2]</a>
                         <a href="#pub-p3" class="research-tag">[P3]</a>
                         <a href="#pub-p4" class="research-tag">[P4]</a>
                         <a href="#pub-p5" class="research-tag">[P5]</a>
+                        <a href="#pub-j2" class="research-tag">[J2]</a>
                         <a href="#pub-c2" class="research-tag">[C2]</a>
                         <a href="#pub-c3" class="research-tag">[C3]</a>
                         <a href="#pub-c4" class="research-tag">[C4]</a>
@@ -1708,8 +1722,8 @@
                 <div class="research-column">
                     <h3 class="font-bold mb-1" style="color: var(--primary-blue); font-size: 1.06rem; line-height: 1.2; white-space: nowrap;">Search & Recommender</h3>
                     <div class="flex flex-wrap gap-1">
-                        <a href="#pub-c1" class="research-tag">[C1]</a>
                         <a href="#pub-j3" class="research-tag">[J3]</a>
+                        <a href="#pub-c1" class="research-tag">[C1]</a>
                         <a href="#pub-c10" class="research-tag">[C10]</a>
                         <span class="research-tag-break" aria-hidden="true"></span>
                         <a href="#experience_shopee" class="research-tag" style="background: rgba(238, 77, 45, 0.15); color: #EE4D2D; font-size: 0.74rem; padding: 0.28rem 0.62rem; margin: 0.08rem;">Work@Shopee</a>
@@ -1738,13 +1752,16 @@
                             <div class="pub-number">P1</div>
                         </div>
                         <div class="flex flex-wrap items-start gap-1">
-                            <span class="badge badge-preprint">Preprint</span>
+                            <span class="badge badge-preprint">Tech Report</span>
+                            <!-- <span class="badge badge-gold">Tech Report</span> -->
+                            <!-- <span class="badge badge-gold">CCF-A</span> -->
                         </div>
                         <div class="flex-1">
-                            <h4 class="font-semibold text-sm mb-1 encrypted-title" style="color: var(--primary-blue);" data-encrypted="RW5oYW5jaW5nIExMTXMgaW4gTG9uZyBDb2RlIFRyYW5zbGF0aW9uIHdpdGggSW5zdHJ1bWVudGF0aW9uIGFuZCBQcm9ncmFtIFN0YXRlIEFsaWdubWVudA==">Loading...</h4>
-                            <p class="text-xs" style="color: var(--text-secondary);">
-                                Xin-Ye Li, Yali Du, <span class="author-highlight">Hui Sun</span>, and Ming Li
+                            <h4 class="font-bold text-sm mb-1" style="color: var(--primary-blue);">Ovis2.5 Technical Report</h4>
+                            <p class="text-xs mb-1" style="color: var(--text-secondary);">
+                                Ovis Team (Contributor: <span class="author-highlight">Hui Sun</span>), Alibaba Group
                             </p>
+                            <p class="text-xs italic" style="color: var(--text-secondary);">2025. Technical Report, arXiv: 2508.11737</p>
                         </div>
                     </div>
 
@@ -1798,16 +1815,13 @@
                             <div class="pub-number">P5</div>
                         </div>
                         <div class="flex flex-wrap items-start gap-1">
-                            <span class="badge badge-preprint">Tech Report</span>
-                            <!-- <span class="badge badge-gold">Tech Report</span> -->
-                            <!-- <span class="badge badge-gold">CCF-A</span> -->
+                            <span class="badge badge-preprint">Preprint</span>
                         </div>
                         <div class="flex-1">
-                            <h4 class="font-bold text-sm mb-1" style="color: var(--primary-blue);">Ovis2.5 Technical Report</h4>
-                            <p class="text-xs mb-1" style="color: var(--text-secondary);">
-                                Ovis Team (Contributor: <span class="author-highlight">Hui Sun</span>), Alibaba Group
+                            <h4 class="font-semibold text-sm mb-1 encrypted-title" style="color: var(--primary-blue);" data-encrypted="RW5oYW5jaW5nIExMTXMgaW4gTG9uZyBDb2RlIFRyYW5zbGF0aW9uIHdpdGggSW5zdHJ1bWVudGF0aW9uIGFuZCBQcm9ncmFtIFN0YXRlIEFsaWdubWVudA==">Loading...</h4>
+                            <p class="text-xs" style="color: var(--text-secondary);">
+                                Xin-Ye Li, Yali Du, <span class="author-highlight">Hui Sun</span>, and Ming Li
                             </p>
-                            <p class="text-xs italic" style="color: var(--text-secondary);">2025. Technical Report, arXiv: 2508.11737</p>
                         </div>
                     </div>
                 </div>
@@ -1842,14 +1856,10 @@
                             <span class="badge">TSE 2025</span>
                             <span class="badge badge-gold">CCF-A</span>
                             <span class="badge badge-gold">SCI</span>
-                            <div style="width: 100%; margin-top: 0.3rem; padding-left: 0.3rem;">
-                                <div style="display: flex; align-items: center; gap: 0.3rem;">
-                                    <span style="color: var(--primary-blue); font-size: 0.75rem;">↳</span>
-                                    <span class="badge">FSE 2026</span>
-                                </div>
-                                <div style="margin-top: 0.2rem; margin-left: 1.05rem;">
-                                    <span class="badge badge-gold">CCF-A</span>
-                                </div>
+                            <div class="fse-sub-line">
+                                <span style="color: var(--primary-blue); font-size: 0.75rem;">↳</span>
+                                <span class="badge">FSE 2026</span>
+                                <span class="badge badge-gold">CCF-A</span>
                             </div>
                         </div>
                         <div class="flex-1">
@@ -2374,7 +2384,27 @@
                     </div>
 
                     <div class="text-sm mb-3" style="color: var(--text-secondary);">
-                        <strong style="color: var(--primary-blue);">Open-Source and Community Impact:</strong> The Ovis series was open-sourced on Hugging Face, surpassing 210k downloads, 1.2k+ likes, and 1.4k+ GitHub stars. At release, Ovis 2.5 ranked first on the OpenCompass open-source leaderboard for models under 40B, while Ovis 2.0 ranked second globally and was repeatedly covered by Hugging Face and QbitAI.
+                        <strong style="color: var(--primary-blue);">Open-Source and Community Impact:</strong> The Ovis series was open-sourced on Hugging Face and repeatedly covered by Hugging Face and QbitAI.
+                    </div>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-3 mb-3">
+                        <div class="highlight-card">
+                            <i class="fas fa-download card-icon" style="color: var(--primary-blue);"></i>
+                            <span class="highlight-number">210k+</span>
+                            <p class="text-xs font-semibold" style="color: var(--primary-blue);">Downloads</p>
+                            <p class="text-xs" style="color: var(--text-secondary);">HuggingFace</p>
+                        </div>
+                        <div class="highlight-card">
+                            <i class="fas fa-heart card-icon" style="color: var(--primary-blue);"></i>
+                            <span class="highlight-number">1.2k+</span>
+                            <p class="text-xs font-semibold" style="color: var(--primary-blue);">Likes</p>
+                            <p class="text-xs" style="color: var(--text-secondary);">HuggingFace</p>
+                        </div>
+                        <div class="highlight-card">
+                            <i class="fas fa-star card-icon" style="color: var(--primary-blue);"></i>
+                            <span class="highlight-number">1.4k+</span>
+                            <p class="text-xs font-semibold" style="color: var(--primary-blue);">GitHub Stars</p>
+                            <p class="text-xs" style="color: var(--text-secondary);">Ovis Repo</p>
+                        </div>
                     </div>
                     
                     <div class="achievement-box">
@@ -2706,7 +2736,7 @@
             </div>
         </div>
 
-        <!-- Teaching Assistant -->
+        <!-- Teaching Assistant (commented out)
         <div class="card p-6" id="teaching">
             <h2 class="text-xl font-bold serif mb-1 inline-flex items-center gap-2" style="color: var(--primary-blue);">
                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
@@ -2734,6 +2764,7 @@
                 </a></strong> (With Prof. Ming Li; Spring 2020)</p>
             </div>
         </div>
+        -->
 
         <!-- Footer -->
         <div class="text-center text-xs py-4" style="color: var(--text-secondary);">
