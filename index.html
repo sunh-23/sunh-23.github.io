@@ -227,6 +227,71 @@
             border: 1px solid var(--border-light);
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
+
+        .job-market-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.85rem;
+            padding: 0.95rem 1.15rem;
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            border-left: 4px solid var(--primary-blue);
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(30, 64, 175, 0.08);
+        }
+
+        .job-market-main {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+            min-width: 0;
+        }
+
+        .job-market-icon {
+            width: 2.2rem;
+            height: 2.2rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            border-radius: 8px;
+            background: white;
+            color: var(--primary-blue);
+            border: 1px solid #bfdbfe;
+        }
+
+        .job-market-card p {
+            margin: 0;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            line-height: 1.55;
+        }
+
+        .job-market-card strong {
+            color: var(--primary-blue);
+        }
+
+        .job-market-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            flex-shrink: 0;
+            padding: 0.45rem 0.68rem;
+            border-radius: 7px;
+            background: var(--primary-blue);
+            border: 1px solid var(--primary-blue);
+            color: white;
+            font-size: 0.88rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: background 0.2s ease, border-color 0.2s ease;
+        }
+
+        .job-market-action:hover {
+            background: #1d4ed8;
+            border-color: #1d4ed8;
+        }
         
         /* Publication间隔减小，字体增大 */
         .publication-item {
@@ -303,6 +368,35 @@
         
         .publication-item p {
             font-size: 0.8rem;
+        }
+
+        #publications .publication-overview {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.55rem;
+            margin: -0.05rem 0 1rem;
+            padding-bottom: 0.85rem;
+            border-bottom: 1px solid var(--border-light);
+            color: var(--text-secondary);
+            font-size: 0.88rem;
+            line-height: 1.55;
+            font-weight: 400;
+        }
+
+        #publications .publication-overview i {
+            flex-shrink: 0;
+            margin-top: 0.22rem;
+            color: var(--primary-blue);
+            font-size: 0.9rem;
+        }
+
+        #publications .publication-overview span {
+            min-width: 0;
+        }
+
+        #publications .publication-overview strong {
+            color: var(--primary-blue);
+            font-weight: 700;
         }
         
         .section-divider {
@@ -728,8 +822,8 @@
             top: 0;
             cursor: pointer;
             transition: all 0.3s ease;
-            border-radius: 3px;  /* 添加略微圆角 */
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);  /* 柔和底部阴影 */
+            border-radius: 7px;
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.32), 0 1px 4px rgba(0, 0, 0, 0.14);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -797,7 +891,7 @@
         
         .timeline-segment[data-event="phd"] { 
             left: 70.07%; 
-            width: 29.20%;  /* 2023.9.1-Present(~2026.12): 40个月/137 */
+            width: 29.93%;  /* 2023.9.1-Present(~2026.12): extend to current timeline end */
         }
         
         /* 工作时间精确计算 */
@@ -817,8 +911,8 @@
         }
         
         .timeline-segment[data-event="alibaba"] { 
-            left: 70.07%; 
-            width: 16.06%;  /* 2023.9.1-2025.6.30: 22个月/137 */
+            left: 71.53%;
+            width: 14.60%;  /* 2023.11.1-2025.6.30: 20个月/137 */
         }
         
         .timeline-segment[data-event="tiktok"] { 
@@ -826,9 +920,9 @@
             width: 6.94%;  /* 2025.7.1-2026.3.31: 9个月/137 */
         }
 
-        .timeline-segment[data-event="alicloud"] { 
-            left: 93.07%; 
-            width: 6.2%; 
+        .timeline-segment[data-event="seed"] {
+            left: 94.16%;
+            width: 5.84%;  /* 2026.6.1-Present(~2026.12): 8个月/137 */
         }
 
         
@@ -1044,6 +1138,21 @@
             /* 手机端显示汉堡菜单 */
             .hamburger-menu {
                 display: flex;
+            }
+
+            .job-market-card {
+                align-items: stretch;
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+
+            .job-market-main {
+                align-items: flex-start;
+            }
+
+            .job-market-action {
+                justify-content: center;
+                width: 100%;
             }
             
             /* 手机端隐藏时间轴 */
@@ -1461,6 +1570,24 @@
             </div>
         </div>
 
+        <!-- Job Market Notice -->
+        <div class="job-market-card" id="job-market">
+            <div class="job-market-main">
+                <div class="job-market-icon" aria-hidden="true">
+                    <i class="fas fa-briefcase"></i>
+                </div>
+                <div>
+                    <p>
+                        <strong>I am seeking full-time opportunities starting in 2027.</strong> I expect to receive my Ph.D. in <strong>June 2027</strong> and am open to roles in AI/LLM research and engineering.
+                    </p>
+                </div>
+            </div>
+            <a href="mailto:sunh@lamda.nju.edu.cn" class="job-market-action">
+                <i class="fas fa-envelope" aria-hidden="true"></i>
+                Contact me
+            </a>
+        </div>
+
         <!-- Biography -->
         <div class="card p-6" id="biography">
             <h2 class="text-xl font-bold serif mb-1 inline-flex items-center gap-2" style="color: var(--primary-blue);">
@@ -1521,20 +1648,52 @@
                     </svg>
                 </a>
                 in 2022. Before starting my Ph.D., I worked as a full-time algorithm engineer at
-                <a href="#experience_shopee" class="text-blue-600 hover:underline">
+                <a href="https://careers.shopee.sg/about/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline inline-flex items-center gap-1">
                     Shopee
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="external-link-icon" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-4.5 0L18 3m0 0h-5.25M18 3v5.25" />
+                    </svg>
                 </a>
                 for over one year, and then returned to Nanjing University for full-time Ph.D. study.
             </p>
 
             <p class="text-sm text-gray-600 leading-relaxed mt-2">
-                My research interests include large language models (LLMs), machine learning, and information retrieval,  with related industry experience at
-                <a href="#experience_shopee" class="text-blue-600 hover:underline">
-                    Shopee
+                My current research focuses on code intelligence and large language models, including test feedback, test-time scaling, and SFT/RL post-training. I also have industry experience in post-training at
+                <a href="https://seed.bytedance.com/en/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline inline-flex items-center gap-1">Seed
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="external-link-icon" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-4.5 0L18 3m0 0h-5.25M18 3v5.25" />
+                    </svg>
                 </a>,
-                <a href="#experience_tiktok" class="text-blue-600 hover:underline">ByteDance</a>,
+                multimodal LLMs at
+                <a href="https://www.alibabagroup.com/en-US/about-alibaba-businesses" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline inline-flex items-center gap-1">Alibaba AIDC
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="external-link-icon" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-4.5 0L18 3m0 0h-5.25M18 3v5.25" />
+                    </svg>
+                </a>,
+                recommendation LLMs at
+                <a href="https://www.tiktok.com/about?lang=en" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline inline-flex items-center gap-1">TikTok
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="external-link-icon" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-4.5 0L18 3m0 0h-5.25M18 3v5.25" />
+                    </svg>
+                </a>,
+                and search/recommendation systems at
+                <a href="https://careers.shopee.sg/about/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline inline-flex items-center gap-1">
+                    Shopee
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="external-link-icon" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-4.5 0L18 3m0 0h-5.25M18 3v5.25" />
+                    </svg>
+                </a>,
+                <a href="https://www.aliexpress.com/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline inline-flex items-center gap-1">AliExpress
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="external-link-icon" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-4.5 0L18 3m0 0h-5.25M18 3v5.25" />
+                    </svg>
+                </a>,
                 and
-                <a href="#experience_AIDC" class="text-blue-600 hover:underline">Alibaba</a>.
+                <a href="https://www.bytedance.com/en/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline inline-flex items-center gap-1">ByteDance
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="external-link-icon" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-4.5 0L18 3m0 0h-5.25M18 3v5.25" />
+                    </svg>
+                </a>.
             </p>
             
             <!-- Timeline -->
@@ -1594,7 +1753,7 @@
                                 <div class="timeline-segment work" data-event="shopee"></div>
                                 <div class="timeline-segment work" data-event="alibaba"></div>
                                 <div class="timeline-segment work" data-event="tiktok"></div>
-                                <div class="timeline-segment work" data-event="alicloud"></div>
+                                <div class="timeline-segment work" data-event="seed"></div>
                             </div>
                         </div>
                     </div>
@@ -1642,11 +1801,11 @@
                                 <div class="work-card-position">Search Algorithm</div>
                             </div>
                             
-                            <!-- Alibaba -->
+                            <!-- Alibaba AIDC -->
                             <div class="timeline-event-card" data-connect="alibaba">
-                                <div class="work-card-date">Sep 2023 - Jun 2025</div>
+                                <div class="work-card-date">Nov 2023 - Jun 2025</div>
                                 <div class="work-card-company-row">
-                                    <div class="work-card-company">Alibaba</div>
+                                    <div class="work-card-company">Alibaba AIDC</div>
                                     <div class="work-card-type">
                                         <i class="fas fa-briefcase"></i>
                                         Intern
@@ -1668,17 +1827,17 @@
                                 <div class="work-card-position">LLM Research for Rec.</div>
                             </div>
 
-                            <!-- Alibaba Cloud -->
-                            <div class="timeline-event-card" data-connect="alicloud">
-                                <div class="work-card-date">Mar 2026 - Present</div>
+                            <!-- Seed -->
+                            <div class="timeline-event-card" id="experience_seed" data-connect="seed">
+                                <div class="work-card-date">Jun 2026 - Present</div>
                                 <div class="work-card-company-row">
-                                    <div class="work-card-company">Alibaba Cloud</div>
+                                    <div class="work-card-company">Seed</div>
                                     <div class="work-card-type">
                                         <i class="fas fa-briefcase"></i>
                                         Intern
                                     </div>
                                 </div>
-                                <div class="work-card-position">LLM Research</div>
+                                <div class="work-card-position">LLM Post-training</div>
                             </div>
                         </div>
                     </div>
@@ -1710,13 +1869,15 @@
                 </div>
                 
                 <div class="research-column">
-                    <h3 class="font-bold mb-1" style="color: var(--primary-blue); font-size: 1.06rem; line-height: 1.2; white-space: nowrap;">Multimodal & Code LLMs</h3>
+                    <h3 class="font-bold mb-1" style="color: var(--primary-blue); font-size: 1.06rem; line-height: 1.2; white-space: nowrap;">Code & Multimodal LLMs</h3>
                     <div class="flex flex-wrap gap-1">
                         <a href="#pub-p1" class="research-tag">[P1]</a>
                         <a href="#pub-p2" class="research-tag">[P2]</a>
                         <a href="#pub-p3" class="research-tag">[P3]</a>
                         <a href="#pub-p4" class="research-tag">[P4]</a>
                         <a href="#pub-p5" class="research-tag">[P5]</a>
+                        <a href="#pub-p6" class="research-tag">[P6]</a>
+                        <a href="#pub-p7" class="research-tag">[P7]</a>
                         <a href="#pub-j2" class="research-tag">[J2]</a>
                         <a href="#pub-c1" class="research-tag">[C1]</a>
                         <a href="#pub-c3" class="research-tag">[C3]</a>
@@ -1724,9 +1885,10 @@
                         <a href="#pub-c5" class="research-tag">[C5]</a>
                         <a href="#pub-c6" class="research-tag">[C6]</a>
                         <a href="#pub-c7" class="research-tag">[C7]</a>
-                        <span class="research-tag-break" aria-hidden="true"></span>
-                        <a href="#experience_AIDC" class="research-tag" style="background: rgba(255, 106, 0, 0.15); color: #FF6A00; font-size: 0.74rem; padding: 0.28rem 0.62rem; margin: 0.08rem;">Intern@Ali AIDC</a>
-                        <a href="#experience_AIDC" class="research-tag" style="background: rgba(22, 119, 255, 0.14); color: #1677FF; font-size: 0.74rem; padding: 0.28rem 0.62rem; margin: 0.08rem;">Intern@Ali Cloud</a>
+                        <span style="display: inline-flex; flex-wrap: nowrap; align-items: center;">
+                            <a href="#experience_AIDC" class="research-tag" style="background: rgba(255, 106, 0, 0.15); color: #FF6A00; font-size: 0.74rem; padding: 0.28rem 0.62rem; margin: 0.08rem; white-space: nowrap;">Intern@Ali AIDC</a>
+                            <a href="#experience_seed" class="research-tag" style="background: rgba(30, 64, 175, 0.14); color: #1e40af; font-size: 0.74rem; padding: 0.28rem 0.62rem; margin: 0.08rem; white-space: nowrap;">Intern@Seed</a>
+                        </span>
                     </div>
                 </div>
                 
@@ -1753,6 +1915,10 @@
                 Publications
             </h2>
             <div class="section-divider"></div>
+            <p class="publication-overview">
+                <i class="fas fa-award" aria-hidden="true"></i>
+                <span>I have been fortunate to collaborate with outstanding researchers on <strong>23 research works</strong> in code intelligence, large language models, and machine learning, including <strong>16 accepted publications</strong> (<strong>15 CCF-A</strong>, e.g., TPAMI, TSE, ICML, ICCV, AAAI, WWW, and ASE) and <strong>9 first/equal-first authored works</strong>.</span>
+            </p>
             
             <!-- Preprints & Under Review -->
             <div class="mb-4">
@@ -1784,7 +1950,7 @@
                             <span class="badge badge-preprint">Preprint</span>
                         </div>
                         <div class="flex-1">
-                            <h4 class="font-bold text-sm mb-1" style="color: var(--primary-blue);">ACES: Who Tests the Tests? Leave-One-Out AUC Consistency for Code Generation</h4>
+                            <h4 class="font-bold text-sm mb-1" style="color: var(--primary-blue);">ACES: Who Tests the Tests? Leave-One-Out AUC Consistency for LLM Code Generation</h4>
                             <p class="text-xs mb-1" style="color: var(--text-secondary);">
                                 <span class="author-highlight">Hui Sun</span>†, Yun-Ji Zhang† (†Equal Contribution), Zheng Xie, Ren-Biao Liu, Yali Du, Xin-Ye Li, and Ming Li
                             </p>
@@ -1800,17 +1966,33 @@
                             <span class="badge badge-preprint">Preprint</span>
                         </div>
                         <div class="flex-1">
-                           <h4 class="font-bold text-sm mb-1" style="color: var(--primary-blue);">Design-Specification Tiling for ICL-based CAD Code Generation</h4>
+                            <h4 class="font-bold text-sm mb-1 encrypted-title" style="color: var(--primary-blue);" data-encrypted="VGVzdHMgUmV2ZWFsIGFuIFVuc3RhdGVkIENvZGU6IChOKzEpIFByb3BhZ2F0aW9uIENvbnNpc3RlbmN5IGZvciBMTE0gQ29kZSBHZW5lcmF0aW9u">Loading...</h4>
                             <p class="text-xs mb-1" style="color: var(--text-secondary);">
-                                Yali Du, Sanzhuo Xi, <span class="author-highlight">Hui Sun</span>, and Ming Li
+                                <span class="author-highlight">Hui Sun</span>, Chao-Zeng Ma, Yun-Ji Zhang, Zheng Xie, Ren-Biao Liu, Yali Du, Xin-Ye Li, and Ming Li
                             </p>
-                            <p class="text-xs italic" style="color: var(--text-secondary);">2026. Preprint, arXiv: 2603.12712</p>
+                            <p class="text-xs italic" style="color: var(--text-secondary);">2026. Completed manuscript, arXiv to appear.</p>
                         </div>
                     </div>
 
                     <div class="publication-item" id="pub-p4">
                         <div class="flex justify-center">
                             <div class="pub-number">P4</div>
+                        </div>
+                        <div class="flex flex-wrap items-start gap-1">
+                            <span class="badge badge-preprint">Preprint</span>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-bold text-sm mb-1" style="color: var(--primary-blue);">Design-Specification Tiling for ICL-based CAD Code Generation</h4>
+                            <p class="text-xs mb-1" style="color: var(--text-secondary);">
+                                Yali Du, San-Zhuo Xi, <span class="author-highlight">Hui Sun</span>, and Ming Li
+                            </p>
+                            <p class="text-xs italic" style="color: var(--text-secondary);">2026. Preprint, arXiv: 2603.12712</p>
+                        </div>
+                    </div>
+
+                    <div class="publication-item" id="pub-p5">
+                        <div class="flex justify-center">
+                            <div class="pub-number">P5</div>
                         </div>
                         <div class="flex flex-wrap items-start gap-1">
                             <span class="badge badge-preprint">Preprint</span>
@@ -1824,9 +2006,10 @@
                         </div>
                     </div>
 
-                    <div class="publication-item" id="pub-p5">
+                    <!-- Temporarily hidden to match the current CV publication list.
+                    <div class="publication-item" id="pub-p6-hidden">
                         <div class="flex justify-center">
-                            <div class="pub-number">P5</div>
+                            <div class="pub-number">P6</div>
                         </div>
                         <div class="flex flex-wrap items-start gap-1">
                             <span class="badge badge-preprint">Under Review</span>
@@ -1836,6 +2019,39 @@
                             <p class="text-xs" style="color: var(--text-secondary);">
                                 Xin-Ye Li, Yali Du, <span class="author-highlight">Hui Sun</span>, and Ming Li
                             </p>
+                        </div>
+                    </div>
+                    -->
+
+                    <div class="publication-item" id="pub-p6">
+                        <div class="flex justify-center">
+                            <div class="pub-number">P6</div>
+                        </div>
+                        <div class="flex flex-wrap items-start gap-1">
+                            <span class="badge badge-preprint">Under Review</span>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-bold text-sm mb-1 encrypted-title" style="color: var(--primary-blue);" data-encrypted="U1BJUkU6IFZlcmlsb2cgR2VuZXJhdGlvbiBieSBTYXRpc2Z5aW5nIExUTCBTcGVjaWZpY2F0aW9ucyB2aWEgUGFydGlhbCBNYXhTQVQgSUNMIGFuZCBSZXBhaXI=">Loading...</h4>
+                            <p class="text-xs mb-1" style="color: var(--text-secondary);">
+                                Yali Du, <span class="author-highlight">Hui Sun</span>, and Ming Li
+                            </p>
+                            <p class="text-xs italic" style="color: var(--text-secondary);">2027. Under Review at ICSE'27</p>
+                        </div>
+                    </div>
+
+                    <div class="publication-item" id="pub-p7">
+                        <div class="flex justify-center">
+                            <div class="pub-number">P7</div>
+                        </div>
+                        <div class="flex flex-wrap items-start gap-1">
+                            <span class="badge badge-preprint">Under Review</span>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-bold text-sm mb-1 encrypted-title" style="color: var(--primary-blue);" data-encrypted="Q0lULUNBRDogQ29uc3RyYWludCBJbnRlbnQgVHJlZS1iYXNlZCBDQUQgQ29kZSBHZW5lcmF0aW9uIGFuZCBWZXJpZmljYXRpb24=">Loading...</h4>
+                            <p class="text-xs mb-1" style="color: var(--text-secondary);">
+                                Yali Du†, <span class="author-highlight">Hui Sun† (Equal Contribution)</span>, San-Zhuo Xi, and Ming Li
+                            </p>
+                            <p class="text-xs italic" style="color: var(--text-secondary);">2027. Under Review at ICSE'27</p>
                         </div>
                     </div>
                 </div>
@@ -2007,7 +2223,7 @@
                             <span class="badge badge-gold">CCF-A</span>
                         </div>
                         <div class="flex-1">
-                            <h4 class="font-bold text-sm mb-1" style="color: var(--primary-blue);">MDP3: A Training-free Approach for List-wise Frame Selection in Video-LLMs</h4>
+                            <h4 class="font-bold text-sm mb-1" style="color: var(--primary-blue);">mDP<sup>3</sup>: A Training-free Approach for List-wise Frame Selection in Video-LLMs</h4>
                             <p class="text-xs mb-1" style="color: var(--text-secondary);">
                                 <span class="author-highlight">Hui Sun</span>, Shiyin Lu, Huanyu Wang, Qing-Guo Chen, Zhao Xu, Weihua Luo, Kaifu Zhang, Ming Li
                             </p>
@@ -2028,7 +2244,7 @@
                             <p class="text-xs mb-1" style="color: var(--text-secondary);">
                                 Ren-Biao Liu, An-Qi Li, Chao-Ding Yang, <span class="author-highlight">Hui Sun</span>, and Ming Li
                             </p>
-                            <p class="text-xs italic" style="color: var(--text-secondary);">The 42nd International Conference on Machine Learning, 2025</p>
+                            <p class="text-xs italic" style="color: var(--text-secondary);">The 41st International Conference on Machine Learning, 2025</p>
                         </div>
                     </div>
 
@@ -2332,7 +2548,7 @@
 
                     <!-- Point 2: Generative Retrieval -->
                     <div class="text-sm mb-2" style="color: var(--text-secondary);">
-                        <strong style="color: var(--primary-blue);">Recall - Generative Retrieval:</strong> Served as PIC to design, implement, and launch a generative recall solution from end to end, with substantial improvements in offline HitRate and strong online A/B gains in CVR, CTCVR, and GPM.
+                        <strong style="color: var(--primary-blue);">Recall - Generative Retrieval:</strong> Was primarily responsible for the design, implementation, and launch of a generative recall solution from end to end, with substantial improvements in offline HitRate and strong online A/B gains in CVR, CTCVR, and GPM.
                     </div>
                     
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-1">
@@ -2381,7 +2597,7 @@
                         </div>
                         <span class="time-tag">
                             <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
-                            Sep 2023 - Jun 2025
+                            Nov 2023 - Jun 2025
                         </span>
                     </div>
                     
@@ -2801,7 +3017,7 @@
 
         <!-- Footer -->
         <div class="text-center text-xs py-4" style="color: var(--text-secondary);">
-            © 2025 Hui Sun (孙辉). Last updated: November 2025
+            © 2026 Hui Sun (孙辉). Last updated: July 2026
         </div>
     </div>
 
